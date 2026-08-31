@@ -1,0 +1,31 @@
+{
+  "name": "adaptive-online-website",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "overrides": {
+    "yaml": "^2.8.3"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/react": "^5.0.4",
+    "@heroicons/react": "^2.2.0",
+    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.1.9",
+    "framer-motion": "^11.11.17",
+    "gray-matter": "^4.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.1",
+    "remark-gfm": "^4.0.0",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^5.7.2"
+  }
+}

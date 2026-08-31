@@ -1,0 +1,52 @@
+---
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const META = {
+  description: "Adaptive Online - Applied AI, leadership and technology consulting",
+  favicon: "/favicon.svg",
+  fonts: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Aclonica&family=Aboreto&display=swap",
+};
+
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={META.description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={META.favicon} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link href={META.fonts} rel="stylesheet">
+  </head>
+  <body class="min-h-screen bg-white dark:bg-dark text-gray-900 dark:text-gray-100 flex flex-col">
+    <Navbar client:load />
+    <main class="px-5 flex-grow">
+      <slot />
+    </main>
+    <Footer client:load />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --accent: 74, 214, 146;
+    --accent-light: 101, 219, 166;
+    --accent-dark: 53, 184, 124;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+</style>

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Font families */
+  --font-sans: 'Quicksand', system-ui, sans-serif;
+  --font-aclonica: 'Aclonica', sans-serif;
+  --font-heading: 'Aboreto', cursive;
+
+  /* Font size scale */
+  --text-xs: 14px;
+  --text-xs--line-height: 20px;
+  --text-sm: 16px;
+  --text-sm--line-height: 24px;
+  --text-base: 18px;
+  --text-base--line-height: 28px;
+  --text-lg: 21.6px;
+  --text-lg--line-height: 32px;
+  --text-xl: 25.92px;
+  --text-xl--line-height: 36px;
+  --text-2xl: 31.104px;
+  --text-2xl--line-height: 40px;
+  --text-3xl: 37.325px;
+  --text-3xl--line-height: 44px;
+  --text-4xl: 44.789px;
+  --text-4xl--line-height: 48px;
+  --text-5xl: 53.747px;
+  --text-5xl--line-height: 1;
+  --text-6xl: 64.496px;
+  --text-6xl--line-height: 1;
+
+  /* Brand colours */
+  --color-primary: #42d692;
+  --color-primary-dark: #35b87c;
+  --color-primary-light: #65dba6;
+  --color-dark: #121212;
+  --color-dark-lighter: #1e1e1e;
+}
+
+@layer base {
+  html {
+    font-family: 'Quicksand', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  h3 {
+    @apply text-gray-800 dark:text-gray-600;
+  }
+
+  /* Prose heading font override */
+  .prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"] *)) {
+    font-family: 'Aboreto', cursive;
+  }
+}
+
+.font-heading {
+  font-family: 'Aboreto', cursive;
+}

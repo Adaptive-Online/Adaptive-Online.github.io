@@ -1,0 +1,262 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AnimatedSection from "../components/AnimatedSection";
+import Timeline from "../components/Timeline";
+import HeroImage from "../components/HeroImage";
+import LogoMarquee from "../components/LogoMarquee.astro";
+import ConsultationButton from "../components/ConsultationButton.jsx";
+---
+
+<Layout title="Adaptive Online - Applied AI, Leadership & Technology Consulting">
+  <main>
+    <!-- Hero Section -->
+    <section
+      class="py-20 w-full bg-gradient-to-b from-primary/10 to-transparent"
+    >
+      <div class="w-full max-w-6xl mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between gap-12"
+        >
+          <AnimatedSection client:load className="text-center md:text-left flex-1">
+            <h1 class="font-heading text-5xl mb-6 text-primary">
+              Adapt faster with Adaptive Online's Applied AI, leadership and technology expertise.
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+              While technology tools are getting easier, technology choices are
+              getting harder — especially with AI. The pace of change is
+              accelerating. I help you adapt your people, processes and
+              technology, with a specialism in Applied AI in regulated markets.
+            </p>
+            <a
+              href="https://calendar.app.google/cp5DNAedjUSDNfG77"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              Book a 45 minute call
+            </a>
+          </AnimatedSection>
+
+          <div class="flex-shrink-0">
+            <HeroImage client:load />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How I Help Section -->
+    <section class="py-16 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-heading text-center mb-12 text-primary">
+          How I Help Organizations Adapt
+        </h2>
+        <div class="grid gap-6 md:grid-cols-2 max-w-6xl mx-auto">
+          <div
+            class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-6"
+          >
+            <h4 class="font-heading text-lg mb-3 text-primary">
+              <span class="underline">The WHAT & WHY</span>: AI and Technology
+              Strategy Formulation and Review
+            </h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              If you have a strategic aim, let's validate it. If you don't,
+              let's build one — including identifying where AI brings the
+              highest value and how to adopt it responsibly.
+            </p>
+          </div>
+          <div
+            class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-6"
+          >
+            <h4 class="font-heading text-lg mb-3 text-primary">
+              <span class="underline">The HOW</span>: Operational Efficiency,
+              Resilience and CyberSecurity
+            </h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              Are the team doing the right things consistently? It's not always
+              easy to tell, day-to-day. A fresh perspective can reveal useful
+              optimisations as well as mitigate risks that routine had missed.
+            </p>
+          </div>
+          <div
+            class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-6"
+          >
+            <h4 class="font-heading text-lg mb-3 text-primary">
+              <span class="underline">The WHO</span>: High Performance Team
+              Building
+            </h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              An engineering team is like an orchestra: the musicians may all
+              have prodigious skills, but without a good conductor, they're not
+              at full potential. I can assess the team, align the team and
+              augment the team, where needed.
+            </p>
+          </div>
+          <div
+            class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-6"
+          >
+            <h4 class="font-heading text-lg mb-3 text-primary">
+              Unbiased, Objective, <span class="underline">ADAPTIVE</span>
+            </h4>
+            <p class="text-gray-600 dark:text-gray-300">
+              It's about what you need and the value I can bring. If I can't
+              help directly, I probably know someone who can.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo Marquee -->
+    <LogoMarquee />
+
+    <!-- About Section -->
+    <section class="py-20 bg-gray-50/50 dark:bg-gray-800/50 backdrop-blur-sm">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-12">
+            <!-- Left Column - Main Content -->
+            <div>
+              <h2 class="text-4xl font-heading mb-6 text-primary">
+                Why Work With Adaptive Online?
+              </h2>
+              <div class="prose dark:prose-invert">
+                <p class="text-2xl mb-6">
+                  I help businesses adapt to and with technology.
+                </p>
+                <p class="text-sm mb-6">
+                  My credos:
+                  <ul class="list-disc pl-5 space-y-2">
+                    <li>With the right people doing the right things, the technology should almost feel invisible.</li>
+                    <li>Technology should enhance your adaptability and performance, not impede it.</li>
+                    <li>Having worked with global firms, as well as start-ups, I appreciate the need to move fast as well as the need to act responsibly.</li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Column - Key Points -->
+            <div class="flex flex-col gap-6">
+              <div
+                class="bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm p-6 rounded-lg shadow-lg"
+              >
+                <h3 class="text-3xl font-bold mb-3 text-primary dark:text-primary">20+</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                  Years of tech industry experience, from hands-on development to enterprise architecture, from Fintech to FMCG, from City to offshore.
+                </p>
+              </div>
+              <div
+                class="bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm p-6 rounded-lg shadow-lg"
+              >
+                <h3 class="text-3xl font-bold mb-3 text-primary dark:text-primary">10+</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                  Global businesses I've worked with at C-suite level. I've been a CTO three times, as well as co-founder, and working as a consultant and board advisor with global C-suite executives.
+                </p>
+              </div>
+              <div
+                class="bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm p-6 rounded-lg shadow-lg"
+              >
+                <h3 class="text-3xl font-bold mb-3 text-primary dark:text-primary">$0-20m+</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                  Budgets for technology projects or product delivery. Big or small, I find and bring the value.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Credentials Section -->
+    <section class="py-16 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-4xl font-heading mb-12 text-center text-primary">
+            Credentials & Education
+          </h2>
+          <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">Anthropic</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Claude Early Adopter Ecosystem Member</p>
+            </div>
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">HuggingFace</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Agentic AI using smolAgents & Langchain</p>
+            </div>
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">ISC2</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Cybersecurity (CC)</p>
+            </div>
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">Blockchain</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Ethereum, Hyperledger & Solidity</p>
+            </div>
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">Google Cloud</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Big Data, ML, Data Warehousing, Streaming Analytics & AI on GCP</p>
+            </div>
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">UK Engineering Council</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Chartered Engineer (C.Eng)</p>
+            </div>
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">Henley Business School</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">MBA (all study completed)</p>
+            </div>
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">Nottingham Trent University</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">BSc (Hons) Computing Systems</p>
+            </div>
+            <div class="bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-5">
+              <h4 class="font-heading text-sm mb-1 text-primary">British Computer Society</h4>
+              <p class="text-gray-600 dark:text-gray-300 text-sm">Member since 1997</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Volunteer Section -->
+    <section class="py-16 bg-gray-50/50 dark:bg-gray-800/50 backdrop-blur-sm">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-4xl font-heading mb-8 text-primary">
+            Giving Back
+          </h2>
+          <div class="bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm rounded-lg p-8 shadow-lg">
+            <h4 class="font-heading text-lg mb-3 text-primary">Caribbean Science Foundation</h4>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              Advisor since 2013, vetting students for the SPISE (Student Programme for Innovation in Science and Engineering) scholarship programme. Previously served as a Candidate Assessor (2010–2014), evaluating summer camp candidates for Prof. Cardinal Warde at MIT.
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+              12+ years of volunteer commitment to STEM education in the Caribbean
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section
+      class="py-32 w-full bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm"
+    >
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-heading text-center mb-16 text-primary">
+          How I have helped others
+        </h2>
+        <Timeline client:load />
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20 bg-primary text-white">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-heading mb-6">Ready to Adapt?</h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Let's discuss how I can help your organization navigate technology
+          challenges and build a more resilient future.
+        </p>
+        <ConsultationButton client:load />
+      </div>
+    </section>
+  </main>
+</Layout>

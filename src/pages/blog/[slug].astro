@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AnimatedSection from '../../components/AnimatedSection';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} - Adaptive Online Blog`}>
+  <div class="min-h-screen w-full">
+    <section class="py-20 w-full">
+      <div class="w-full">
+        <AnimatedSection client:load className="max-w-4xl mx-auto bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm rounded-lg p-8">
+          <a
+            href="/blog"
+            class="inline-flex items-center text-primary hover:text-primary-dark mb-8 transition-colors"
+          >
+            <svg
+              class="w-4 h-4 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            Back to Blog
+          </a>
+
+          <article class="prose prose-lg dark:prose-invert max-w-none">
+            <header class="mb-8 not-prose">
+              <h1 class="font-heading text-4xl mb-4 text-primary">{post.data.title}</h1>
+              <div class="flex flex-wrap gap-4 items-center text-gray-600 dark:text-gray-400">
+                <time datetime={post.data.pubDate}>
+                  {new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+                {post.data.tags && (
+                  <div class="flex flex-wrap gap-2">
+                    {post.data.tags.map((tag: string) => (
+                      <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </header>
+
+            {post.data.image && (
+              <img
+                src={post.data.image.url}
+                alt={post.data.image.alt}
+                class="w-full h-auto rounded-lg mb-8 not-prose"
+              />
+            )}
+
+            <Content />
+          </article>
+        </AnimatedSection>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  @reference "../../styles/global.css";
+
+  /* Custom styling for code blocks */
+  :global(pre) {
+    @apply bg-gray-900 dark:bg-black/50 rounded-lg p-4 overflow-x-auto;
+  }
+
+  /* Custom styling for inline code */
+  :global(code:not(pre code)) {
+    @apply bg-gray-200 dark:bg-gray-800 rounded px-1.5 py-0.5;
+  }
+
+  /* Custom styling for blockquotes */
+  :global(blockquote) {
+    @apply border-l-4 border-primary pl-4 italic;
+  }
+
+  /* Custom styling for links */
+  :global(a) {
+    @apply text-primary hover:text-primary-dark transition-colors;
+  }
+</style>

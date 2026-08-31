@@ -1,0 +1,105 @@
+---
+import LogoCallout from './LogoCallout';
+
+// List of company logos and names
+const companies = [
+  {
+    name: "Anthropic",
+    logo: "/logos/Anthropic_Symbol_0.svg",
+    title: "Applied AI at a Tier 1 Investment Bank",
+    description: "Engaged by Anthropic to introduce Claude Code and applied AI to technology PM practices at a global tier 1 investment bank. Collaborated with Anthropic FDEs to implement a complex prototype project; trained staff and built agents to automate project processing, documentation, and reporting, completing the project 3 months early."
+  },
+  {
+    name: "Blue Hat Associates",
+    logo: "/logos/BlueHat_logo.png",
+    title: "Technology Capability Partner",
+    description: "Specialising in boosting clients' technology capabilities to tackle complex or scale-up challenges. Established the company's product lab; guiding clients in understanding and adopting AI, sharing insights from real-world deployments."
+  },
+  {
+    name: "VeriHome",
+    logo: "/logos/logo-verihome.webp",
+    title: "Founding CTO — AI & Blockchain Provenance",
+    description: "Coaxing and coaching this AI and blockchain-based provenance and scoring start-up for landlords and homeowners from concept to proof, to product."
+  },
+  { 
+    name: "BBC",
+    logo: "/logos/BBC_logo.svg",
+    title: "Data-driven sales at BBC Technology",
+    description: "Implemented and migrated the sales team to Salesforce.com, to get them hunting as a pack, optimising lead conversion and collaboratively closing opportunities."
+  },
+  { 
+    name: "CapCo",
+    logo: "/logos/capco-wipro-logo.svg",
+    title: "Leadership in Consulting",
+    description: "Trained echelons of Capco's consultants to lead clients and more effectively manage their projects and peers."
+  },
+  { 
+    name: "Diageo",
+    logo: "/logos/diageo-logo.svg",
+    title: "Pressure testing strategy",
+    description: "Designed and implemented proprietary wargaming software, and helped colleagues run country and region level wargames to pressure test their annual strategic plans."
+  },
+  { 
+    name: "Heineken",
+    logo: "/logos/heineken-logo.svg",
+    title: "Building strategic plans using proprietary software",
+    description: "Helped Heineken's leadership teams to build strategic plans into the McKinney Rogers Advance dashboard, and ensured they tracked progress through their mission year."
+  },
+  { 
+    name: "Sanofi",
+    logo: "/logos/sanofi-logo.svg",
+    title: "Healthcare Leadership",
+    description: "Worked with Sanofi Brasil to optimise their leadership team and build execution-ready strategic plans on the Advance dashboard."
+  },
+  { 
+    name: "Figtree",
+    logo: "/logos/figtree-logo-red-white.svg",
+    title: "Build a Family Office",
+    description: "Shaped Figtree's technology roadmap and policies, building scalable solutions for rapid growth while maintaining security and reliability. Set for success"
+  },
+  { 
+    name: "Harris Paints International",
+    logo: "/logos/harris-paints-logo.svg",
+    title: "Head of Technology",
+    description: "Rescued a stalled ERP project, migrated the IT infrastructure to Googlecloud and re-negotiated the international telecoms contract. Saved over $250,000 annually"
+  },
+  { 
+    name: "Tribe AI",
+    logo: "/logos/tribe-logo.svg",
+    title: "AI readiness",
+    description: "Helping Tribe.ai's clients to identify and articulate best-value AI use cases."
+  },
+  { 
+    name: "McKinney Rogers",
+    logo: "/logos/mckinneyrogers-logo.svg",
+    title: "Chief Technology Officer",
+    description: "Responsible for all internal technology and software products. Saved $1m in costs in first year, migrated core technology to Azure cloud, re-designed core software products and built a new mobile app. Helped sell the business to Fortune 1000 firm."
+  }
+];
+---
+
+<div class="py-8 bg-primary/40 dark:bg-primary/20">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <LogoCallout client:load {companies} />
+  </div>
+</div>
+
+<style>
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  /* Pause animation on hover */
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+</style>

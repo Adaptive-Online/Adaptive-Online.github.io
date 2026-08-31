@@ -1,0 +1,25 @@
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-scroll-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.logo-scroll {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+
+.logo-scroll:hover,
+.logo-scroll.paused {
+  animation-play-state: paused;
+}
