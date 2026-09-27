@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import renderBold from './renderBold';
 
 interface TimelineItem {
   year: string;
@@ -9,27 +10,27 @@ interface TimelineItem {
 const TIMELINE_DATA: TimelineItem[] = [
   {
     year: 'Applied AI PM',
-    title: 'Anthropic — AI for Tier 1 Investment Bank',
-    description: 'Introduced Claude Code and applied AI to technology PM practices at a global tier 1 investment bank. Collaborated with Anthropic FDEs to implement a complex prototype; trained staff and built agents to automate project processing, documentation, and reporting, completing the project 3 months early.'
+    title: 'Frontier AI Lab — AI for Tier 1 Investment Bank',
+    description: 'Introduced Claude Code and applied AI to technology PM practices at a global tier 1 investment bank. Collaborated with the AI lab\'s FDEs to implement a complex prototype; trained staff and built agents to automate project processing, documentation, and reporting, completing the project 3 months early.'
   },
   {
     year: 'Partner',
-    title: 'Blue Hat Associates — Technology Capability',
-    description: 'Specialising in boosting clients\' technology capabilities to tackle complex or scale-up challenges. Established the company\'s product lab; guiding clients in understanding and adopting AI, sharing insights from real-world deployments.'
+    title: 'Technology Consultancy — Capability Building',
+    description: 'Specialising in boosting clients\' technology capabilities to tackle complex or scale-up challenges. Established the company\'s product lab and **Hatstand**, a spec and AI-driven software development framework (SDLC) for large financial enterprises. Guiding clients in understanding and adopting AI, sharing insights from real-world deployments.'
   },
   {
     year: 'Founding CTO',
-    title: 'VeriHome — AI & Blockchain Provenance',
-    description: 'Coaxing and coaching this AI and blockchain-based provenance and scoring start-up for landlords and homeowners from concept to proof, to product.'
+    title: 'PropTech Start-up — AI Provenance & Scoring',
+    description: 'Coaxing and coaching this AI-based provenance and scoring start-up for landlords and homeowners from concept to proof, to product.'
   },
   {
     year: 'Principal AI PM',
-    title: 'Tribe AI — AI Collective',
-    description: 'Part of the Tribe AI collective — a vetted talent pool working on and sharing expertise on AI projects. Facilitating Anthropic Claude projects and workshops, and helping clients identify best-value AI use cases.'
+    title: 'AI Consultancy — Claude Training & AI Advisory',
+    description: 'Part of a vetted AI talent pool, working on and sharing expertise on AI projects. Facilitating Anthropic Claude projects and workshops, having trained over 4,000 people in Claude, and helping clients identify best-value AI use cases.'
   },
   {
     year: 'Co-founder',
-    title: 'Caribbean Mind & Hormone Clinic — Telemedicine',
+    title: 'Healthcare Start-up — Caribbean Telemedicine',
     description: 'Co-founding a telemedicine offering to the chronically under-served Caribbean region, starting in Barbados and spreading to Dominica, St Vincent and Guyana. Bootstrapped with a website plugging into various healthcare platforms. Launched in 5 months.'
   },
   {
@@ -39,17 +40,17 @@ const TIMELINE_DATA: TimelineItem[] = [
   },
   {
     year: 'Chief Technology Officer',
-    title: 'FigTree Financial Group — Multi-Family Office',
-    description: 'Employee #5 at this financial services startup. Established information architecture and procedures, including security and data governance. Ran selection for, and deployment of, a cutting-edge wealth advisor platform (D1g1t + FutureVault + Bloomberg). Established solid partnerships with vendors and transitioned FigTree to best-in-class secure, scalable systems.'
+    title: 'Financial Services Start-up — Multi-Family Office',
+    description: 'Employee #5 at this financial services startup. Established information architecture and procedures, including security and data governance. Ran selection for, and deployment of, a cutting-edge wealth advisor platform (D1g1t + FutureVault + Bloomberg). Established solid partnerships with vendors and transitioned the firm to best-in-class secure, scalable systems.'
   },
   {
     year: 'Chief Technology Officer',
-    title: 'McKinney Rogers — Global Consultancy, sold to Fortune 1000',
-    description: 'Led the technology function including outsourced IT, development and support teams for 3 core SaaS products and mobile apps serving 70+ clients including Walmart, Diageo, Heineken, and JP Morgan. Reduced IT costs by 60%, increased margins by 25%. Helped the CEO sell the business to GP Strategies.'
+    title: 'Global Consultancy — Sold to Fortune 1000 Firm',
+    description: 'Led the technology function including outsourced IT, development and support teams for 3 core SaaS products and mobile apps serving 70+ clients including Walmart, Diageo, Heineken, and JP Morgan. Reduced IT costs by 60%, increased margins by 25%. Helped the CEO sell the business to a Fortune 1000 firm.'
   },
   {
     year: 'VP Technology',
-    title: 'Harris Paints Group — Caribbean Manufacturer',
+    title: 'Caribbean Manufacturer — 17 International Markets',
     description: 'Oversaw all IT across this $50m turnover company operating in 17 international markets. Rescued a stalling ERP project, migrated IT to Google Cloud, re-negotiated international telecoms. Saved over $250,000 annually and delivered 20% YoY operational savings.'
   }
 ];
@@ -131,7 +132,7 @@ export default function Timeline() {
           <div className="w-1/2">
             <div className={cardClasses}>
               <p className="text-gray-600 dark:text-gray-300">
-                {item.description}
+                {renderBold(item.description)}
               </p>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './LogoCallout.module.css';
+import renderBold from './renderBold';
 
 interface Company {
   name: string;
@@ -89,7 +90,7 @@ export default function LogoCallout({ companies }: LogoCalloutProps) {
                 </button>
               </div>
               <p className="text-gray-600 dark:text-gray-300">
-                {selectedCompany.description || "Description coming soon..."}
+                {selectedCompany.description ? renderBold(selectedCompany.description) : "Description coming soon..."}
               </p>
             </div>
           </div>
