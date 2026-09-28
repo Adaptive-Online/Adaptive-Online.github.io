@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { motion } from 'framer-motion'
 import ThemeToggle from './ThemeToggle'
@@ -85,8 +86,8 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
+      {/* Mobile menu - portalled to body: the header's backdrop-filter would otherwise trap fixed children */}
+      {mobileMenuOpen && createPortal(
         <div className="fixed inset-0 z-[100]" role="dialog" aria-modal="true">
           {/* Background overlay */}
           <div 
@@ -130,7 +131,8 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   )
