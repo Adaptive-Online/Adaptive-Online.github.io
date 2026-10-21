@@ -190,7 +190,12 @@
   .sdlc-seg .fill { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--sdlc-accent); width: 0; }
   .sdlc-seg button { position: relative; z-index: 1; appearance: none; border: 0; background: none; cursor: pointer; font: inherit; color: var(--sdlc-muted); font-weight: 700; font-size: 14px; padding: 10px 4px; border-radius: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .3s; }
   .sdlc-seg button[aria-selected="true"] { color: var(--sdlc-fg); }
-  @media (max-width: 560px) { .sdlc-seg button { font-size: 12px; } .sdlc-seg button .long { display: none; } }
+  @media (max-width: 560px) {
+    .sdlc-ring .node text.lbl { font-size: 22px; }
+    .sdlc-ring .node text.num { font-size: 22px; }
+    .sdlc-ring .iter-lbl { font-size: 15px; }
+  }
+  @media (max-width: 560px) { .sdlc-seg button { font-size: 11px; padding-inline: 0; } .sdlc-seg button .long { display: none; } }
 
   .sdlc-footnote { color: var(--sdlc-muted); font-size: 13px; padding: 0 6px; max-width: 80ch; margin: 0; }
   .sdlc-footnote a { color: var(--sdlc-accent-text); text-decoration: underline; }

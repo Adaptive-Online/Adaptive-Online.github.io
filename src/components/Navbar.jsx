@@ -46,7 +46,7 @@ export default function Navbar() {
   return (
     <header className="bg-white/80 dark:bg-dark/80 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
       <nav className="w-full" aria-label="Global">
-        <div className="flex items-center justify-between py-6">
+        <div className="flex items-center justify-between px-5 py-6">
           {/* Brand */}
           <div className="flex lg:flex-1">
             <a href="/" className="flex items-center">
