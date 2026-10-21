@@ -1,0 +1,321 @@
+---
+// Looping smoked-glass infographic of the AI-driven SDLC.
+// Nodes and segment buttons are built client-side, so styles are global and scoped by the .sdlc prefix.
+---
+
+<section class="sdlc relative overflow-hidden py-20 bg-white/50 dark:bg-gray-900/50">
+  <div class="sdlc-ambient" aria-hidden="true">
+    <div class="sdlc-orb a"></div><div class="sdlc-orb b"></div><div class="sdlc-orb c"></div>
+  </div>
+
+  <div class="sdlc-wrap container mx-auto px-4">
+    <header class="sdlc-header">
+      <div>
+        <p class="sdlc-eyebrow">Agentic delivery</p>
+        <h2 class="text-4xl font-heading text-primary">The AI SDLC Loop</h2>
+        <p class="sdlc-lede">How work moves through an AI-driven development cycle: explore, plan, build, verify, review, ship, and feed what was learned into the next lap.</p>
+      </div>
+      <div class="sdlc-controls">
+        <span class="sdlc-lap" id="sdlc-lap">Lap 1</span>
+        <button class="sdlc-btn" id="sdlc-play" type="button" aria-pressed="true">
+          <svg id="sdlc-icoPause" viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg>
+          <svg id="sdlc-icoPlay" viewBox="0 0 14 14" hidden><path d="M3 1.5v11a.8.8 0 0 0 1.2.7l9-5.5a.8.8 0 0 0 0-1.4l-9-5.5A.8.8 0 0 0 3 1.5z"/></svg>
+          <span id="sdlc-playTxt">Pause</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="sdlc-grid">
+      <div class="sdlc-glass sdlc-ring-card">
+        <svg class="sdlc-ring" viewBox="-70 -40 540 480" role="img" aria-label="Six-stage loop: Explore, Plan, Build, Verify, Review, Ship and learn">
+          <defs>
+            <filter id="sdlc-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <circle class="track" cx="200" cy="200" r="150"/>
+          <circle class="trail" id="sdlc-trail" cx="200" cy="200" r="150" transform="rotate(-90 200 200)"/>
+          <path class="iter" id="sdlc-iter" d="M 316 284 Q 268 300 228 334"/>
+          <text class="iter-lbl" x="250" y="290" text-anchor="middle" transform="rotate(-38 264 300)">iterate</text>
+          <circle class="core" cx="200" cy="200" r="86"/>
+          <text class="core-k" x="200" y="176">NOW</text>
+          <text class="core-name" id="sdlc-coreName" x="200" y="212">Explore</text>
+          <text class="core-step" id="sdlc-coreStep" x="200" y="240">1 / 6</text>
+          <g id="sdlc-nodes"></g>
+          <circle class="comet" id="sdlc-comet" r="6" cx="200" cy="50"/>
+        </svg>
+      </div>
+
+      <article class="sdlc-glass sdlc-sheet" aria-live="polite">
+        <div class="sdlc-grabber" aria-hidden="true"></div>
+        <div class="sdlc-fade" id="sdlc-sheetBody">
+          <div class="sdlc-sheet-top">
+            <div class="sdlc-badge" id="sdlc-badge">1</div>
+            <div><h3 class="sdlc-name" id="sdlc-name">Explore</h3><p class="sdlc-sub" id="sdlc-sub"></p></div>
+          </div>
+        </div>
+        <p class="sdlc-desc sdlc-fade" id="sdlc-desc"></p>
+        <dl class="sdlc-group sdlc-fade" id="sdlc-rows"></dl>
+        <span class="sdlc-gate sdlc-fade" id="sdlc-gate"><i></i><span></span></span>
+      </article>
+    </div>
+
+    <nav class="sdlc-glass sdlc-seg-wrap" aria-label="Jump to stage">
+      <div class="sdlc-seg" role="tablist" id="sdlc-seg"><div class="thumb" id="sdlc-thumb"><div class="fill" id="sdlc-fill"></div></div></div>
+    </nav>
+
+    <p class="sdlc-footnote">Stage names follow the explore, plan, code, verify, commit workflow Anthropic recommends in its <a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank" rel="noopener noreferrer">Claude Code best practices</a>, extended with review and a learning step that writes lessons back into <code>CLAUDE.md</code>.</p>
+  </div>
+</section>
+
+<style is:global>
+  .sdlc {
+    --sdlc-fg: #121212;
+    --sdlc-muted: #55625c;
+    --sdlc-glass: rgba(255,255,255,.52);
+    --sdlc-glass-strong: rgba(255,255,255,.72);
+    --sdlc-glass-line: rgba(255,255,255,.85);
+    --sdlc-glass-edge: rgba(18,18,18,.08);
+    --sdlc-track: rgba(18,18,18,.10);
+    --sdlc-accent: var(--color-primary);
+    --sdlc-accent-text: #1c8f5b;
+    --sdlc-accent-ink: #062316;
+    --sdlc-orb-a: rgba(66,214,146,.45);
+    --sdlc-orb-b: rgba(101,219,166,.35);
+    --sdlc-orb-c: rgba(30,120,90,.20);
+    --sdlc-shadow: 0 20px 50px -20px rgba(10,40,25,.30);
+    color: var(--sdlc-fg);
+  }
+  .dark .sdlc {
+    --sdlc-fg: #f1f5f3;
+    --sdlc-muted: #9aa8a1;
+    --sdlc-glass: rgba(28,32,30,.48);
+    --sdlc-glass-strong: rgba(36,42,39,.66);
+    --sdlc-glass-line: rgba(255,255,255,.14);
+    --sdlc-glass-edge: rgba(0,0,0,.5);
+    --sdlc-track: rgba(255,255,255,.10);
+    --sdlc-accent-text: #65dba6;
+    --sdlc-orb-a: rgba(66,214,146,.30);
+    --sdlc-orb-b: rgba(53,184,124,.20);
+    --sdlc-orb-c: rgba(20,90,60,.40);
+    --sdlc-shadow: 0 30px 60px -25px rgba(0,0,0,.8);
+  }
+
+  .sdlc-ambient { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .sdlc-orb { position: absolute; border-radius: 50%; filter: blur(70px); }
+  .sdlc-orb.a { width: 40vmax; height: 40vmax; background: var(--sdlc-orb-a); top: -12vmax; left: -10vmax; animation: sdlc-drift-a 22s ease-in-out infinite alternate; }
+  .sdlc-orb.b { width: 34vmax; height: 34vmax; background: var(--sdlc-orb-b); bottom: -14vmax; right: -8vmax; animation: sdlc-drift-b 26s ease-in-out infinite alternate; }
+  .sdlc-orb.c { width: 26vmax; height: 26vmax; background: var(--sdlc-orb-c); top: 30%; left: 45%; animation: sdlc-drift-c 30s ease-in-out infinite alternate; }
+  @keyframes sdlc-drift-a { to { transform: translate(18vmax, 10vmax) scale(1.1); } }
+  @keyframes sdlc-drift-b { to { transform: translate(-16vmax, -8vmax) scale(.9); } }
+  @keyframes sdlc-drift-c { to { transform: translate(-20vmax, 12vmax) scale(1.2); } }
+
+  .sdlc-wrap { position: relative; max-width: 72rem; display: grid; gap: 20px; }
+
+  .sdlc-glass {
+    background: var(--sdlc-glass);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    backdrop-filter: blur(28px) saturate(170%);
+    border: 1px solid var(--sdlc-glass-line);
+    box-shadow: inset 0 1px 0 var(--sdlc-glass-line), 0 0 0 .5px var(--sdlc-glass-edge), var(--sdlc-shadow);
+    border-radius: 28px;
+  }
+
+  .sdlc-header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; padding: 4px 6px; }
+  .sdlc-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--sdlc-accent-text); margin: 0 0 6px; }
+  .sdlc-lede { margin: 8px 0 0; color: var(--sdlc-muted); max-width: 52ch; font-weight: 500; }
+
+  .sdlc-controls { display: flex; align-items: center; gap: 10px; }
+  .sdlc-btn {
+    appearance: none; border: 0; cursor: pointer; font: inherit; font-weight: 600; color: var(--sdlc-fg);
+    height: 40px; padding: 0 16px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sdlc-glass-strong); box-shadow: inset 0 0 0 .5px var(--sdlc-glass-line), 0 0 0 .5px var(--sdlc-glass-edge);
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+    transition: transform .15s ease;
+  }
+  .sdlc-btn:active { transform: scale(.96); }
+  .sdlc-btn:focus-visible, .sdlc-seg button:focus-visible { outline: 2px solid var(--sdlc-accent); outline-offset: 2px; }
+  .sdlc-btn svg { width: 14px; height: 14px; fill: currentColor; }
+  .sdlc-lap { font-size: 13px; color: var(--sdlc-muted); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .sdlc-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+  @media (max-width: 860px) { .sdlc-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .sdlc-ring-card { padding: 18px; display: grid; place-items: center; }
+  .sdlc-ring { width: 100%; max-width: 520px; height: auto; display: block; overflow: visible; }
+  .sdlc-ring .track { fill: none; stroke: var(--sdlc-track); stroke-width: 2; }
+  .sdlc-ring .trail { fill: none; stroke: var(--sdlc-accent); stroke-width: 4; stroke-linecap: round; filter: url(#sdlc-glow); }
+  .sdlc-ring .comet { fill: var(--sdlc-accent); filter: url(#sdlc-glow); }
+  .sdlc-ring .node { cursor: pointer; }
+  .sdlc-ring .node circle.bg { fill: var(--sdlc-glass-strong); stroke: var(--sdlc-glass-line); stroke-width: 1; transition: fill .4s, stroke .4s; }
+  .sdlc-ring .node circle.halo { fill: none; stroke: var(--sdlc-accent); stroke-width: 2; opacity: 0; transition: opacity .4s; }
+  .sdlc-ring .node text.num { font-family: 'Aclonica', 'Quicksand', system-ui, sans-serif; font-size: 17px; fill: var(--sdlc-muted); text-anchor: middle; dominant-baseline: central; transition: fill .4s; }
+  .sdlc-ring .node text.lbl { font-family: 'Quicksand', system-ui, sans-serif; font-weight: 700; font-size: 14px; fill: var(--sdlc-muted); letter-spacing: .06em; text-transform: uppercase; dominant-baseline: central; transition: fill .4s; }
+  .sdlc-ring .node.done text.num { fill: var(--sdlc-accent-text); }
+  .sdlc-ring .node.on circle.bg { fill: var(--sdlc-accent); stroke: var(--sdlc-accent); }
+  .sdlc-ring .node.on circle.halo { opacity: .5; animation: sdlc-pulse 1.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+  .sdlc-ring .node.on text.num { fill: var(--sdlc-accent-ink); }
+  .sdlc-ring .node.on text.lbl { fill: var(--sdlc-fg); }
+  @keyframes sdlc-pulse { from { transform: scale(1); opacity: .6; } to { transform: scale(1.7); opacity: 0; } }
+  .sdlc-ring .iter { fill: none; stroke: var(--sdlc-accent); stroke-width: 1.5; stroke-dasharray: 3 6; opacity: .25; transition: opacity .4s; }
+  .sdlc-ring .iter.live { opacity: .9; animation: sdlc-march .8s linear infinite; }
+  .sdlc-ring .iter-lbl { font-family: 'Quicksand', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .1em; fill: var(--sdlc-muted); text-transform: uppercase; }
+  @keyframes sdlc-march { to { stroke-dashoffset: -18; } }
+  .sdlc-ring .core { fill: var(--sdlc-glass-strong); stroke: var(--sdlc-glass-line); }
+  .sdlc-ring .core-k { font-family: 'Quicksand', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .16em; fill: var(--sdlc-muted); text-anchor: middle; }
+  .sdlc-ring .core-name { font-family: 'Aboreto', Georgia, serif; font-size: 26px; fill: var(--sdlc-fg); text-anchor: middle; }
+  .sdlc-ring .core-step { font-family: 'Aclonica', 'Quicksand', system-ui, sans-serif; font-size: 13px; fill: var(--sdlc-accent-text); text-anchor: middle; font-variant-numeric: tabular-nums; }
+
+  .sdlc-sheet { padding: 26px 24px 22px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .sdlc-grabber { width: 36px; height: 5px; border-radius: 3px; background: var(--sdlc-track); align-self: center; margin-top: -12px; }
+  .sdlc-sheet-top { display: flex; align-items: center; gap: 14px; }
+  .sdlc-badge { flex: none; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: var(--sdlc-accent); color: var(--sdlc-accent-ink); font-family: 'Aclonica', 'Quicksand', system-ui, sans-serif; font-size: 22px; box-shadow: 0 8px 20px -8px var(--sdlc-accent); }
+  .sdlc .sdlc-name { font-family: 'Aboreto', Georgia, serif; font-weight: 400; font-size: clamp(26px, 3.4vw, 34px); margin: 0; line-height: 1.1; color: var(--sdlc-fg); }
+  .sdlc-sub { margin: 2px 0 0; color: var(--sdlc-muted); font-weight: 600; font-size: 14px; }
+  .sdlc-desc { margin: 0; font-size: 17px; font-weight: 500; max-width: 46ch; }
+  .sdlc-group { margin: 0; border-radius: 16px; overflow: hidden; background: var(--sdlc-glass-strong); box-shadow: inset 0 0 0 .5px var(--sdlc-glass-line); }
+  .sdlc-group .row { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; padding: 12px 16px; align-items: baseline; }
+  .sdlc-group .row + .row { border-top: .5px solid var(--sdlc-track); }
+  .sdlc-group dt { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sdlc-muted); }
+  .sdlc-group dd { margin: 0; font-weight: 500; }
+  .sdlc code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; padding: 1px 6px; border-radius: 6px; background: var(--sdlc-track); }
+  .sdlc-gate { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: var(--sdlc-track); }
+  .sdlc-gate i { width: 8px; height: 8px; border-radius: 50%; background: var(--sdlc-accent); box-shadow: 0 0 8px var(--sdlc-accent); }
+  .sdlc-fade { transition: opacity .35s ease, transform .35s ease; }
+  .sdlc-fade.out { opacity: 0; transform: translateY(6px); }
+
+  .sdlc-seg-wrap { padding: 6px; border-radius: 18px; }
+  .sdlc-seg { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .sdlc-seg .thumb { position: absolute; top: 0; bottom: 0; left: 0; width: calc(100% / 6); border-radius: 13px; background: var(--sdlc-glass-strong); box-shadow: 0 3px 8px rgba(0,0,0,.12), inset 0 0 0 .5px var(--sdlc-glass-line); transition: transform .45s cubic-bezier(.3,1.3,.5,1); overflow: hidden; }
+  .sdlc-seg .fill { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--sdlc-accent); width: 0; }
+  .sdlc-seg button { position: relative; z-index: 1; appearance: none; border: 0; background: none; cursor: pointer; font: inherit; color: var(--sdlc-muted); font-weight: 700; font-size: 14px; padding: 10px 4px; border-radius: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .3s; }
+  .sdlc-seg button[aria-selected="true"] { color: var(--sdlc-fg); }
+  @media (max-width: 560px) { .sdlc-seg button { font-size: 12px; } .sdlc-seg button .long { display: none; } }
+
+  .sdlc-footnote { color: var(--sdlc-muted); font-size: 13px; padding: 0 6px; max-width: 80ch; margin: 0; }
+  .sdlc-footnote a { color: var(--sdlc-accent-text); text-decoration: underline; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sdlc-orb, .sdlc-ring .node.on circle.halo, .sdlc-ring .iter.live { animation: none; }
+    .sdlc-fade, .sdlc-seg .thumb { transition: none; }
+  }
+</style>
+
+<script>
+  const STAGES = [
+    { name: "Explore", short: "Explore", sub: "Read before writing",
+      desc: "Claude reads the relevant files, docs and issue history so it understands the problem before any code changes.",
+      claude: "Searches the repo, reads source and tests, summarises what it found", you: "Point it at the right files and the real goal",
+      out: "Shared context, open questions", gate: "No edits yet" },
+    { name: "Plan", short: "Plan", sub: "Agree the approach",
+      desc: "Claude proposes a step-by-step plan with the files it will touch and the risks it sees. You approve or redirect it.",
+      claude: "Drafts the plan in <code>plan mode</code>, flags trade-offs", you: "Approve, cut scope or change direction",
+      out: "Approved plan / spec", gate: "Human approves plan" },
+    { name: "Build", short: "Build", sub: "Small, reviewable steps",
+      desc: "Claude implements the plan in small increments, writing tests alongside the code and keeping each step easy to read.",
+      claude: "Edits files, writes tests, runs the build", you: "Watch the diff, interrupt early if it drifts",
+      out: "Working diff + tests", gate: "Follows the plan" },
+    { name: "Verify", short: "Verify", sub: "Loop until green",
+      desc: "Tests, type checks, linters and screenshots give Claude a target. It iterates between Build and Verify until everything passes.",
+      claude: "Runs checks, reads failures, fixes and re-runs", you: "Check the behaviour you actually care about",
+      out: "Green test run, screenshots", gate: "All checks pass" },
+    { name: "Review", short: "Review", sub: "Second set of eyes",
+      desc: "A fresh Claude session or subagent reviews the diff for bugs and security issues, then a person signs off.",
+      claude: "Runs <code>/code-review</code>, fixes what it finds", you: "Read the PR and give final approval",
+      out: "Reviewed pull request", gate: "Human signs off" },
+    { name: "Ship & Learn", short: "Ship", long: " & Learn", sub: "Merge, deploy, remember",
+      desc: "Claude commits with a clear message, opens the PR and deploys. Lessons from this lap go into CLAUDE.md so the next lap starts smarter.",
+      claude: "Commits, opens the PR, updates <code>CLAUDE.md</code>", you: "Merge and monitor the release",
+      out: "Merged change, updated memory", gate: "Feeds the next lap" },
+  ];
+  const N = STAGES.length, STAGE_MS = 4200, CX = 200, CY = 200, R = 150, C = 2 * Math.PI * R, TRAIL = 120;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (id: string) => document.getElementById("sdlc-" + id)!;
+  const svgNS = "http://www.w3.org/2000/svg";
+
+  const nodes = STAGES.map((s, i) => {
+    const a = (-90 + i * 360 / N) * Math.PI / 180;
+    const x = CX + R * Math.cos(a), y = CY + R * Math.sin(a);
+    const lx = CX + (R + 44) * Math.cos(a), ly = CY + (R + 42) * Math.sin(a);
+    const c = Math.cos(a), anchor = Math.abs(c) < .2 ? "middle" : c > 0 ? "start" : "end";
+    const g = document.createElementNS(svgNS, "g");
+    g.setAttribute("class", "node");
+    g.innerHTML = `<circle class="halo" cx="${x}" cy="${y}" r="24"/><circle class="bg" cx="${x}" cy="${y}" r="24"/>
+      <text class="num" x="${x}" y="${y}">${i + 1}</text>
+      <text class="lbl" x="${anchor === "middle" ? lx : lx - (c > 0 ? 18 : -18)}" y="${ly}" text-anchor="${anchor}">${s.short}</text>`;
+    g.addEventListener("click", () => jump(i));
+    $("nodes").appendChild(g);
+    return g;
+  });
+
+  const segBtns = STAGES.map((s, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("role", "tab");
+    b.innerHTML = s.short + (s.long ? `<span class="long">${s.long}</span>` : "");
+    b.addEventListener("click", () => jump(i));
+    $("seg").appendChild(b);
+    return b;
+  });
+
+  $("trail").setAttribute("stroke-dasharray", `${TRAIL} ${C - TRAIL}`);
+
+  let t = 0, last = performance.now(), playing = true, visible = true, current = -1;
+
+  function render(idx: number) {
+    const s = STAGES[idx];
+    const fades = ["sheetBody", "desc", "rows", "gate"].map($);
+    fades.forEach(el => el.classList.add("out"));
+    setTimeout(() => {
+      $("badge").textContent = String(idx + 1);
+      $("name").textContent = s.name;
+      $("sub").textContent = s.sub;
+      $("desc").textContent = s.desc;
+      $("rows").innerHTML = `<div class="row"><dt>Claude</dt><dd>${s.claude}</dd></div>
+        <div class="row"><dt>You</dt><dd>${s.you}</dd></div>
+        <div class="row"><dt>Output</dt><dd>${s.out}</dd></div>`;
+      $("gate").querySelector("span")!.textContent = s.gate;
+      fades.forEach(el => el.classList.remove("out"));
+    }, reduce ? 0 : 220);
+    $("coreName").textContent = s.short;
+    $("coreStep").textContent = `${idx + 1} / ${N}`;
+    nodes.forEach((g, i) => g.setAttribute("class", "node" + (i === idx ? " on" : i < idx ? " done" : "")));
+    segBtns.forEach((b, i) => b.setAttribute("aria-selected", String(i === idx)));
+    $("thumb").style.transform = `translateX(${idx * 100}%)`;
+    $("iter").classList.toggle("live", idx === 3);
+  }
+
+  function frame(now: number) {
+    if (playing && visible) t += now - last;
+    last = now;
+    const total = t / STAGE_MS, lapFrac = (total % N) / N;
+    const idx = Math.floor(total) % N;
+    if (idx !== current) { current = idx; render(idx); }
+    $("lap").textContent = "Lap " + (Math.floor(total / N) + 1);
+    $("trail").setAttribute("stroke-dashoffset", String(TRAIL - lapFrac * C));
+    const a = lapFrac * 2 * Math.PI - Math.PI / 2;
+    $("comet").setAttribute("cx", String(CX + R * Math.cos(a)));
+    $("comet").setAttribute("cy", String(CY + R * Math.sin(a)));
+    $("fill").style.width = ((total % 1) * 100) + "%";
+    requestAnimationFrame(frame);
+  }
+
+  function jump(i: number) {
+    const lap = Math.floor(t / STAGE_MS / N);
+    t = (lap * N + i) * STAGE_MS + 1;
+  }
+
+  $("play").addEventListener("click", () => {
+    playing = !playing;
+    $("play").setAttribute("aria-pressed", String(playing));
+    $("playTxt").textContent = playing ? "Pause" : "Play";
+    $("icoPause").toggleAttribute("hidden", !playing);
+    $("icoPlay").toggleAttribute("hidden", playing);
+  });
+
+  // Only advance the loop while the section is on screen, so visitors see it from stage 1.
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0.2 })
+    .observe(document.querySelector(".sdlc")!);
+
+  requestAnimationFrame(frame);
+</script>
