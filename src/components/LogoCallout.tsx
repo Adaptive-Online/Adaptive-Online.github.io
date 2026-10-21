@@ -76,7 +76,7 @@ export default function LogoCallout({ companies }: LogoCalloutProps) {
                     alt={selectedCompany.name} 
                     className="h-12 w-auto"
                   />
-                  <h4 className="font-heading text-lg mb-0 text-primary">
+                  <h4 className="font-heading text-lg mb-0 text-primary-text">
                     {selectedCompany.title || `Working with ${selectedCompany.name}`}
                   </h4>
                 </div>

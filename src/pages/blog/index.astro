@@ -15,7 +15,7 @@ const sortedPosts = allPosts
     <section class="py-20 w-full">
       <div class="w-full">
         <AnimatedSection client:load className="max-w-4xl mx-auto bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm rounded-lg p-8">
-          <h1 class="font-heading text-4xl mb-8 text-primary">Blog</h1>
+          <h1 class="font-heading text-4xl mb-8 text-primary-text">Blog</h1>
           <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">
             Thoughts, ideas and insights from Adaptive on software, leadership
             and the tech industry.
@@ -30,7 +30,7 @@ const sortedPosts = allPosts
                 href="https://heuristix.substack.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors"
+                class="text-gray-600 hover:text-primary-text dark:text-gray-400 dark:hover:text-primary-text transition-colors"
                 aria-label="Substack Articles"
               >
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -43,7 +43,7 @@ const sortedPosts = allPosts
                 href="https://neiltaggart.medium.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors"
+                class="text-gray-600 hover:text-primary-text dark:text-gray-400 dark:hover:text-primary-text transition-colors"
                 aria-label="Medium Articles"
               >
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -56,7 +56,7 @@ const sortedPosts = allPosts
                 href="https://www.linkedin.com/in/neiltaggart/recent-activity/articles/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors"
+                class="text-gray-600 hover:text-primary-text dark:text-gray-400 dark:hover:text-primary-text transition-colors"
                 aria-label="LinkedIn Articles"
               >
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -72,7 +72,7 @@ const sortedPosts = allPosts
             {sortedPosts.map((post) => (
               <article class="bg-white/20 dark:bg-gray-900/20 rounded-lg p-6 hover:bg-white/30 dark:hover:bg-gray-900/30 transition-colors">
                 <h2 class="text-2xl font-heading mb-2">
-                  <a href={`/blog/${post.id}`} class="hover:text-primary transition-colors">
+                  <a href={`/blog/${post.id}`} class="hover:text-primary-text transition-colors">
                     {post.data.title}
                   </a>
                 </h2>

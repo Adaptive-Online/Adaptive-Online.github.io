@@ -22,7 +22,7 @@ const { Content } = await render(post);
         <AnimatedSection client:load className="max-w-4xl mx-auto bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm rounded-lg p-8">
           <a
             href="/blog"
-            class="inline-flex items-center text-primary hover:text-primary-dark mb-8 transition-colors"
+            class="inline-flex items-center text-primary-text hover:text-primary-dark mb-8 transition-colors"
           >
             <svg
               class="w-4 h-4 mr-2"
@@ -42,7 +42,7 @@ const { Content } = await render(post);
 
           <article class="prose prose-lg dark:prose-invert max-w-none">
             <header class="mb-8 not-prose">
-              <h1 class="font-heading text-4xl mb-4 text-primary">{post.data.title}</h1>
+              <h1 class="font-heading text-4xl mb-4 text-primary-text">{post.data.title}</h1>
               <div class="flex flex-wrap gap-4 items-center text-gray-600 dark:text-gray-400">
                 <time datetime={post.data.pubDate}>
                   {new Date(post.data.pubDate).toLocaleDateString('en-US', {
@@ -54,7 +54,7 @@ const { Content } = await render(post);
                 {post.data.tags && (
                   <div class="flex flex-wrap gap-2">
                     {post.data.tags.map((tag: string) => (
-                      <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
+                      <span class="bg-primary/10 text-primary-text px-3 py-1 rounded-full text-sm">
                         #{tag}
                       </span>
                     ))}
@@ -99,6 +99,6 @@ const { Content } = await render(post);
 
   /* Custom styling for links */
   :global(a) {
-    @apply text-primary hover:text-primary-dark transition-colors;
+    @apply text-primary-text hover:text-primary-dark transition-colors;
   }
 </style>

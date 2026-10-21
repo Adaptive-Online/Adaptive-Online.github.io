@@ -46,7 +46,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               {...ANIMATION_PROPS}
-              className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-primary-text transition-colors"
               aria-label={`${name} Profile`}
             >
               <svg

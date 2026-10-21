@@ -102,7 +102,7 @@ export default function CapabilityCarousel() {
 
   const arrowClasses = `
     hidden md:flex absolute top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center
-    rounded-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm shadow-lg text-primary
+    rounded-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm shadow-lg text-primary-text
     hover:bg-white dark:hover:bg-gray-700 transition-colors
     focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary
   `;
@@ -127,7 +127,7 @@ export default function CapabilityCarousel() {
             aria-label={`${index + 1} of ${CAPABILITY_DATA.length}: ${item.benefit}`}
           >
             <div className="h-full flex flex-col bg-white/30 dark:bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 shadow-lg">
-              <h3 className="font-heading text-xl mb-2 text-primary dark:text-primary">
+              <h3 className="font-heading text-xl mb-2 text-primary-text">
                 {item.benefit}
               </h3>
               <p className="text-sm font-bold text-gray-900 dark:text-white mb-4">

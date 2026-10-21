@@ -77,7 +77,7 @@ export default function Navbar() {
               <NavLink
                 key={item.name}
                 {...item}
-                className="text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors"
+                className="text-sm font-semibold leading-6 text-gray-900 dark:text-white hover:text-primary-text transition-colors"
               />
             ))}
             <BookingButton />
