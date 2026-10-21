@@ -39,6 +39,19 @@
   --color-dark-lighter: #1e1e1e;
 }
 
+/* Green for text: darker in light mode for contrast, brand green in dark mode */
+@theme inline {
+  --color-primary-text: var(--primary-text);
+}
+
+:root {
+  --primary-text: #178050;
+}
+
+.dark {
+  --primary-text: var(--color-primary);
+}
+
 @layer base {
   html {
     font-family: 'Quicksand', system-ui, sans-serif;
