@@ -1,0 +1,18 @@
+title: "Intelligence-Led Defence: A Field Guide to Cyber Threat Intelligence"
+summary: >-
+  A practitioner's guide to moving from indicator feeds to real adversary
+  understanding. It walks through the intelligence lifecycle in the SOC, the
+  four levels of intelligence, and how the Cyber Kill Chain, MITRE ATT&CK and
+  the Diamond Model work together, then profiles the TTPs of groups from FIN7
+  and Scattered Spider to APT29 and Volt Typhoon, closing with a 90-day
+  maturity roadmap.
+url: /research/intelligence-led-defence/
+image: /research/images/intelligence-led-defence.png
+imageAlt: "Title screen of the Intelligence-Led Defence field guide, green type over a network graph"
+tags:
+  - cybersecurity
+  - threatintelligence
+  - mitreattack
+  - secops
+pubDate: 2026-11-13
+source: Adaptive Online

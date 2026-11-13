@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ResearchList from '../../components/ResearchList.astro';
+import { getResearch } from '../../lib/research';
+
+const items = await getResearch();
+---
+
+<Layout title="Research | Adaptive Online">
+  <ResearchList items={items} />
+</Layout>

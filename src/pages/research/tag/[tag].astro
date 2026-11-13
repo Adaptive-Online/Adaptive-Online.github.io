@@ -1,0 +1,20 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ResearchList from '../../../components/ResearchList.astro';
+import { getResearch } from '../../../lib/research';
+
+export async function getStaticPaths() {
+  const items = await getResearch();
+  const tags = [...new Set(items.flatMap((item) => item.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag, items: items.filter((item) => item.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag, items } = Astro.props;
+---
+
+<Layout title={`#${tag} | Research | Adaptive Online`}>
+  <ResearchList items={items} activeTag={tag} />
+</Layout>
