@@ -1,0 +1,17 @@
+title: "Rethinking Claude Code Best Practices"
+summary: >-
+  A timely update, as of November 2026, on how to get the best out of Claude.
+  Lydia Hallie of Anthropic shows how much the way we work with Claude has
+  changed in just six months, enough that it is substantially reshaping the
+  software development lifecycle. Teams still using last year's habits are
+  likely overspending on, and under-utilising, Claude Code.
+url: https://youtu.be/vlfCjWuv4es
+image: /research/images/rethinking-claude-code-best-practices.jpg
+imageAlt: "Lydia Hallie at the AI Engineer Code Summit with the title Rethinking Claude Code"
+tags:
+  - claudecode
+  - ai
+  - sdlc
+  - aiengineering
+pubDate: 2026-11-13
+source: Lydia Hallie, Anthropic · AI Engineer (video)
