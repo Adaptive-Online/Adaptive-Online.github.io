@@ -7,6 +7,7 @@ import BookingButton from './BookingButton'
 
 const navigation = [
   { name: 'Home', href: '/' },
+  { name: 'Research', href: '/research/' },
   { name: 'Blog', href: 'https://heuristix.substack.com', target: '_blank', rel: 'noopener noreferrer' },
 ]
 

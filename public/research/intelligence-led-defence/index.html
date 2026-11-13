@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Intelligence-Led Defence: A Field Guide to Cyber Threat Intelligence | Adaptive Online</title>
+<meta name="description" content="A practitioner's guide to the cyber threat intelligence lifecycle, the Kill Chain, MITRE ATT&CK and Diamond Model frameworks, and adversary TTPs from crime syndicates to state APTs.">
+<meta property="og:title" content="Intelligence-Led Defence: A Field Guide to Cyber Threat Intelligence">
+<meta property="og:image" content="https://adaptive-online.com/research/images/intelligence-led-defence.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Aboreto&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#121212;--panel:#1b1e1d;--panel2:#222624;--line:#2e3431;--ink:#f3f4f6;--mute:#9ca3af;--amber:#42d692;--red:#e5534b;--teal:#4fb3d9;--blue:#5b9cf0;--violet:#a882e8;
+--sans:'Quicksand',system-ui,sans-serif;--mono:'Quicksand',system-ui,sans-serif;--code:'IBM Plex Mono',monospace;--serif:'Aboreto',Georgia,serif}
+*{box-sizing:border-box;min-width:0}body{overflow-x:hidden}section{overflow-x:clip}.fig{overflow-x:auto}.hero{min-height:min(88vh,900px)}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--sans)}
+a{color:var(--amber)}
+nav{position:sticky;top:0;z-index:10;background:rgba(18,18,18,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+nav a{display:inline-block;padding:12px 14px;font:500 13px var(--mono);color:var(--mute);text-decoration:none}
+nav a:hover{color:var(--amber)}
+section{max-width:1080px;margin:0 auto;padding:88px 24px;border-bottom:1px solid var(--line)}
+.kicker{font:600 12px var(--mono);letter-spacing:.14em;color:var(--amber);text-transform:uppercase}
+h1{font:400 clamp(1.9rem,4.4vw,3.3rem)/1.15 var(--serif);margin:.3em 0 .4em;max-width:20ch;color:var(--amber);letter-spacing:.02em}
+h2{font:400 clamp(1.5rem,2.8vw,2.1rem)/1.2 var(--serif);color:var(--amber);letter-spacing:.02em;margin:.3em 0 .6em}
+h3{font-size:1.1rem;margin:1.6em 0 .4em}
+p{max-width:72ch;color:#d1d5db}
+.lead{font-size:1.2rem;color:var(--ink)}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}
+.card h4{margin:0 0 6px;font-size:1rem}.card p{margin:0;font-size:.94rem;color:var(--mute)}
+.tag{display:inline-block;font:500 11px var(--code);padding:2px 8px;border:1px solid var(--line);border-radius:99px;color:var(--mute);margin:2px}
+.fig{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin:28px 0}
+.fig figcaption{font:12px var(--mono);color:var(--mute);margin-top:10px}
+svg text{font-family:var(--sans)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 12px var(--mono);color:var(--amber);text-transform:uppercase;letter-spacing:.06em}
+code,.mono{font-family:var(--code);font-size:.88em;color:var(--teal)}
+.callout{border-left:3px solid var(--amber);background:var(--panel2);padding:14px 18px;border-radius:0 8px 8px 0;margin:24px 0}
+.hero{display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+#heroNet{position:absolute;inset:0;width:100%;height:100%;opacity:.35;pointer-events:none}
+.hero>*:not(svg){position:relative}
+.toc{columns:2;gap:40px;margin-top:30px;font:14px var(--mono);color:var(--mute)}
+.toc a{color:var(--mute);text-decoration:none}.toc a:hover{color:var(--amber)}
+/* lifecycle */
+.lc-node{cursor:pointer;transition:transform .3s}
+.lc-node circle{transition:fill .3s,stroke .3s}
+.lc-node.on circle{fill:var(--amber);stroke:var(--amber)}
+.lc-node.on text{fill:#121212}
+#lcDetail{min-height:150px}
+.orbit{animation:spin 18s linear infinite;transform-origin:250px 250px}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* pyramid */
+.pyr polygon{transition:opacity .4s}
+.pyr g{animation:rise .6s both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* kill chain */
+.kc{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:24px 0}
+.kc div{background:var(--panel2);border:1px solid var(--line);padding:14px 10px;border-radius:8px;font-size:.85rem;position:relative;transition:all .4s;cursor:pointer}
+.kc div b{display:block;font:600 11px var(--mono);color:var(--mute)}
+.kc div.act{background:var(--red);border-color:var(--red);color:#fff}.kc div.act b{color:#fff}
+.kc div.brk{background:var(--teal);border-color:var(--teal);color:#121212}
+@media(max-width:760px){.kc{grid-template-columns:1fr 1fr}.toc{columns:1}}
+/* attack */
+.attack{display:grid;grid-template-columns:repeat(14,minmax(110px,1fr));gap:4px;overflow-x:auto;padding-bottom:8px}
+.tac{font-size:11px}
+.tac h5{margin:0 0 4px;background:var(--panel2);padding:8px 6px;font:600 11px var(--mono);border-radius:4px;color:var(--amber);min-height:46px}
+.tec{background:#171a19;border:1px solid var(--line);padding:5px 6px;margin-bottom:3px;border-radius:3px;color:var(--mute);transition:all .25s;line-height:1.3}
+.tec.hit{background:rgba(229,83,75,.22);border-color:var(--red);color:#fff}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+button{font:500 13px var(--mono);background:var(--panel2);color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:6px;cursor:pointer}
+button:hover,button.on{border-color:var(--amber);color:var(--amber)}
+/* diamond */
+.dm-edge{stroke-dasharray:6 6;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.flow{stroke-dasharray:8 10;animation:dash 1s linear infinite}
+/* profiles */
+.prof{display:none}.prof.on{display:block}
+.spec{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:10px 0 4px}
+.spec span{flex:1}
+.mat{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.mat div{padding:14px 10px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);font-size:.85rem}
+.mat div b{display:block;font:400 22px var(--serif);color:var(--amber)}
+@media(max-width:760px){.mat{grid-template-columns:1fr}}
+.reveal{transition:opacity .7s,transform .7s}
+.reveal.pre{opacity:0;transform:translateY(16px)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+footer{max-width:1080px;margin:0 auto;padding:40px 24px;color:var(--mute);font-size:.9rem}
+footer li{margin-bottom:6px}
+</style>
+</head>
+<body>
+<nav>
+<a href="/research" style="color:var(--amber)">← Research</a><a href="#s1">01 Lifecycle</a><a href="#s2">02 Levels</a><a href="#s3">03 Beyond IOCs</a><a href="#s4">04 Intel-led defence</a><a href="#s5">05 Kill Chain</a><a href="#s6">06 ATT&CK</a><a href="#s7">07 Diamond</a><a href="#s8">08 Combining</a><a href="#s9">09 Adversary TTPs</a><a href="#s10">10 Roadmap</a><a href="#refs">Sources</a>
+</nav>
+
+<section class="hero">
+<svg id="heroNet" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice"></svg>
+<div class="kicker">Field guide · Cyber Threat Intelligence</div>
+<h1>Intelligence-Led Defence: from indicators to adversary understanding</h1>
+<p class="lead">A practitioner's guide to the intelligence lifecycle, the frameworks analysts rely on, and the tactics, techniques and procedures used by everyone from financially motivated crime syndicates to state-sponsored APTs.</p>
+<div class="toc">
+<div><a href="#s1">01 · The intelligence lifecycle</a></div>
+<div><a href="#s2">02 · Strategic, operational, tactical, technical</a></div>
+<div><a href="#s3">03 · Why IOC feeds are not enough</a></div>
+<div><a href="#s4">04 · Implementing intelligence-led defence</a></div>
+<div><a href="#s5">05 · The Cyber Kill Chain®</a></div>
+<div><a href="#s6">06 · MITRE ATT&CK®</a></div>
+<div><a href="#s7">07 · The Diamond Model</a></div>
+<div><a href="#s8">08 · Using the frameworks together</a></div>
+<div><a href="#s9">09 · TTPs across the adversary spectrum</a></div>
+<div><a href="#s10">10 · Maturity roadmap & checklist</a></div>
+</div>
+</section>
+
+<!-- 1 -->
+<section id="s1" class="reveal">
+<div class="kicker">01 · Foundations</div>
+<h2>The intelligence lifecycle in security operations</h2>
+<p>Threat intelligence is not a data feed; it is a <strong>process</strong> that turns raw information into decisions. The classic lifecycle, borrowed from national intelligence practice, is a continuous loop. Each pass is anchored to a stakeholder's question and ends with feedback that sharpens the next question.</p>
+<div class="fig">
+<div class="grid g2" style="align-items:center">
+<svg viewBox="0 0 500 500" id="lcSvg" role="img" aria-label="Six-phase intelligence lifecycle">
+<circle cx="250" cy="250" r="170" fill="none" stroke="#2e3431" stroke-width="2"/>
+<g class="orbit"><circle cx="250" cy="80" r="6" fill="#42d692"/></g>
+<text x="250" y="244" text-anchor="middle" fill="#9ca3af" font-size="13">STAKEHOLDER</text>
+<text x="250" y="264" text-anchor="middle" fill="#f3f4f6" font-size="15" font-weight="600">Decisions</text>
+</svg>
+<div id="lcDetail" class="card"></div>
+</div>
+<figcaption>Fig 1 · Click a phase. The amber marker represents a requirement moving through the cycle.</figcaption>
+</div>
+<h3>Lifecycle in a SOC context</h3>
+<table>
+<tr><th>Phase</th><th>SOC reality</th><th>Common failure</th></tr>
+<tr><td>Direction</td><td>Priority Intelligence Requirements (PIRs) agreed with CISO, IR, risk, fraud</td><td>"Collect everything" with no questions</td></tr>
+<tr><td>Collection</td><td>Telemetry, IR cases, ISACs, vendor reporting, OSINT, dark-web sources</td><td>Over-reliance on free IOC feeds</td></tr>
+<tr><td>Processing</td><td>Normalise to STIX 2.1, de-duplicate, enrich, score confidence in a TIP</td><td>Unscored indicators pushed straight to blocklists</td></tr>
+<tr><td>Analysis</td><td>Map to ATT&CK, cluster with Diamond Model, assess relevance and likelihood</td><td>Reporting "what" without "so what"</td></tr>
+<tr><td>Dissemination</td><td>Detections for SOC, briefs for executives, hunts for threat hunters; TLP marked</td><td>One report format for every audience</td></tr>
+<tr><td>Feedback</td><td>Detection hit-rates, hunt outcomes, stakeholder surveys</td><td>No measurement, so no improvement</td></tr>
+</table>
+</section>
+
+<!-- 2 -->
+<section id="s2" class="reveal">
+<div class="kicker">02 · Audiences</div>
+<h2>Four levels of intelligence</h2>
+<p>The same adversary activity produces different products for different consumers. Shelf-life increases as you move up the stack, and so does business impact.</p>
+<div class="fig">
+<svg viewBox="0 0 900 300" role="img" aria-label="Intelligence levels by audience and shelf life">
+<defs><linearGradient id="lv" x1="0" x2="1"><stop offset="0" stop-color="#4fb3d9"/><stop offset="1" stop-color="#42d692"/></linearGradient></defs>
+<g font-size="14">
+<rect x="20" y="210" width="200" height="70" rx="8" fill="#222624" stroke="#4fb3d9"/><text x="120" y="240" text-anchor="middle" fill="#f3f4f6" font-weight="600">Technical</text><text x="120" y="262" text-anchor="middle" fill="#9ca3af" font-size="12">IPs, hashes · hours–days</text>
+<rect x="240" y="150" width="200" height="130" rx="8" fill="#222624" stroke="#5b9cf0"/><text x="340" y="200" text-anchor="middle" fill="#f3f4f6" font-weight="600">Tactical</text><text x="340" y="222" text-anchor="middle" fill="#9ca3af" font-size="12">TTPs, detections · months</text>
+<rect x="460" y="90" width="200" height="190" rx="8" fill="#222624" stroke="#a882e8"/><text x="560" y="160" text-anchor="middle" fill="#f3f4f6" font-weight="600">Operational</text><text x="560" y="182" text-anchor="middle" fill="#9ca3af" font-size="12">Campaigns, intent · months</text>
+<rect x="680" y="30" width="200" height="250" rx="8" fill="#222624" stroke="#42d692"/><text x="780" y="130" text-anchor="middle" fill="#f3f4f6" font-weight="600">Strategic</text><text x="780" y="152" text-anchor="middle" fill="#9ca3af" font-size="12">Risk, trends · years</text>
+</g>
+<line x1="20" y1="295" x2="880" y2="295" stroke="url(#lv)" stroke-width="3"/>
+</svg>
+<figcaption>Fig 2 · Shelf-life and decision altitude rise from technical to strategic intelligence.</figcaption>
+</div>
+<div class="grid g2">
+<div class="card"><h4>Strategic → Board, CISO, risk</h4><p>Who targets our sector, why, and how this changes risk appetite, investment and M&A or geographic expansion decisions.</p></div>
+<div class="card"><h4>Operational → IR lead, SOC manager</h4><p>Details of specific campaigns: timing, targeting, infrastructure, likely next steps. Drives readiness and surge planning.</p></div>
+<div class="card"><h4>Tactical → Detection engineers, hunters</h4><p>Adversary behaviours mapped to ATT&CK, converted into detection logic, hunt hypotheses and control tests.</p></div>
+<div class="card"><h4>Technical → SIEM, EDR, firewalls</h4><p>Machine-readable indicators for blocking and enrichment. Useful, cheap, and quickly obsolete.</p></div>
+</div>
+</section>
+
+<!-- 3 -->
+<section id="s3" class="reveal">
+<div class="kicker">03 · Beyond the feed</div>
+<h2>Why strategic intelligence outperforms IOC feeds</h2>
+<p>David Bianco's <strong>Pyramid of Pain</strong> captures the core argument: the higher up the pyramid you detect and deny, the more it costs the adversary to adapt. Hash values change with one byte; TTPs are rooted in tooling, skills and tradecraft that take months to rebuild.</p>
+<div class="fig">
+<div class="grid g2" style="align-items:center">
+<svg viewBox="0 0 420 360" class="pyr" role="img" aria-label="Pyramid of Pain">
+<g style="animation-delay:1.5s"><polygon points="210,10 250,70 170,70" fill="#e5534b"/><text x="210" y="60" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">TTPs</text></g>
+<g style="animation-delay:1.25s"><polygon points="170,72 250,72 285,125 135,125" fill="#e0703f"/><text x="210" y="104" text-anchor="middle" font-size="12" fill="#fff">Tools</text></g>
+<g style="animation-delay:1s"><polygon points="135,127 285,127 320,180 100,180" fill="#42d692"/><text x="210" y="158" text-anchor="middle" font-size="12" fill="#121212">Network / host artefacts</text></g>
+<g style="animation-delay:.75s"><polygon points="100,182 320,182 355,235 65,235" fill="#c9b54a"/><text x="210" y="213" text-anchor="middle" font-size="12" fill="#121212">Domain names</text></g>
+<g style="animation-delay:.5s"><polygon points="65,237 355,237 390,290 30,290" fill="#6fb38a"/><text x="210" y="268" text-anchor="middle" font-size="12" fill="#121212">IP addresses</text></g>
+<g style="animation-delay:.25s"><polygon points="30,292 390,292 415,340 5,340" fill="#4fb3d9"/><text x="210" y="321" text-anchor="middle" font-size="12" fill="#121212">Hash values</text></g>
+</svg>
+<div>
+<p><span class="tag">Bottom · Trivial</span> Re-compile a binary, rent a new VPS: the IOC is dead in minutes.</p>
+<p><span class="tag">Middle · Annoying</span> Artefacts like named pipes, user-agents or registry keys force retooling.</p>
+<p><span class="tag">Top · Tough</span> Detecting <em style="font-style:normal;color:var(--amber)">behaviour</em> such as LSASS access or Kerberoasting forces the adversary to learn new tradecraft.</p>
+</div></div>
+<figcaption>Fig 3 · Pyramid of Pain (Bianco, 2013). Strategic and tactical intelligence works at the top layers.</figcaption>
+</div>
+<h3>Where strategic intelligence creates impact</h3>
+<div class="grid g3">
+<div class="card"><h4>Investment prioritisation</h4><p>Tie security spend to the adversaries and techniques most likely to hit you, rather than to vendor hype cycles.</p></div>
+<div class="card"><h4>Risk quantification</h4><p>Feed threat likelihood into FAIR-style models, so risk registers reflect real adversary capability and intent.</p></div>
+<div class="card"><h4>Business decisions</h4><p>Assess the threat landscape before entering a new market, acquiring a company or onboarding a critical supplier.</p></div>
+<div class="card"><h4>Third-party & supply-chain risk</h4><p>Monitor suppliers' exposure and breach history; anticipate attacks on MSPs and software vendors.</p></div>
+<div class="card"><h4>Regulatory readiness</h4><p>Support DORA threat-led penetration testing (TLPT), TIBER-EU / CBEST scenarios and NIS2 risk management.</p></div>
+<div class="card"><h4>Crisis anticipation</h4><p>Geopolitical events (elections, conflicts, sanctions) predict hacktivist and state activity spikes weeks ahead.</p></div>
+</div>
+<div class="callout"><strong>Rule of thumb:</strong> IOC feeds answer "is this bad?". Strategic intelligence answers "what should we do differently next quarter, and why?" Both are needed, but only one changes an organisation's posture.</div>
+<h3>IOC feeds vs intelligence-led practice</h3>
+<table>
+<tr><th>Dimension</th><th>IOC-feed model</th><th>Intelligence-led model</th></tr>
+<tr><td>Unit of work</td><td>Indicator</td><td>Adversary behaviour & intent</td></tr>
+<tr><td>Shelf-life</td><td>Hours to days</td><td>Months to years</td></tr>
+<tr><td>False positives</td><td>High (shared hosting, CDNs)</td><td>Lower, context-rich</td></tr>
+<tr><td>Defends against</td><td>Yesterday's campaign</td><td>Next campaign by the same actor</td></tr>
+<tr><td>Metric</td><td>Indicators ingested</td><td>Technique coverage, MTTD, decisions influenced</td></tr>
+</table>
+</section>
+
+<!-- 4 -->
+<section id="s4" class="reveal">
+<div class="kicker">04 · Implementation</div>
+<h2>Implementing intelligence-led defence</h2>
+<p>Intelligence-led defence means letting knowledge of real adversaries determine what you detect, hunt, test and fix. The engine is a loop between CTI, detection engineering, threat hunting, red/purple teaming and incident response.</p>
+<div class="fig">
+<svg viewBox="0 0 900 340" role="img" aria-label="Intelligence-led defence operating loop">
+<g font-size="13" text-anchor="middle">
+<rect x="360" y="20" width="180" height="60" rx="8" fill="#222624" stroke="#42d692"/><text x="450" y="47" fill="#f3f4f6" font-weight="600">CTI team</text><text x="450" y="66" fill="#9ca3af" font-size="11">PIRs · actor profiles</text>
+<rect x="680" y="140" width="190" height="60" rx="8" fill="#222624" stroke="#5b9cf0"/><text x="775" y="167" fill="#f3f4f6" font-weight="600">Detection engineering</text><text x="775" y="186" fill="#9ca3af" font-size="11">Sigma · EDR · SIEM rules</text>
+<rect x="360" y="260" width="180" height="60" rx="8" fill="#222624" stroke="#a882e8"/><text x="450" y="287" fill="#f3f4f6" font-weight="600">Purple team</text><text x="450" y="306" fill="#9ca3af" font-size="11">emulate · validate</text>
+<rect x="30" y="140" width="190" height="60" rx="8" fill="#222624" stroke="#4fb3d9"/><text x="125" y="167" fill="#f3f4f6" font-weight="600">Threat hunting & IR</text><text x="125" y="186" fill="#9ca3af" font-size="11">hypotheses · findings</text>
+<circle cx="450" cy="170" r="54" fill="#1b1e1d" stroke="#2e3431"/><text x="450" y="166" fill="#42d692" font-weight="600">Threat</text><text x="450" y="184" fill="#42d692" font-weight="600">model</text>
+</g>
+<g fill="none" stroke="#42d692" stroke-width="2" class="flow">
+<path d="M540 50 Q700 60 760 138"/><path d="M760 202 Q700 290 542 290"/><path d="M358 290 Q200 290 140 202"/><path d="M140 138 Q200 60 358 50"/>
+</g>
+</svg>
+<figcaption>Fig 4 · The intelligence-led defence loop: every hunt, incident and purple-team test becomes new collection.</figcaption>
+</div>
+<h3>Seven implementation steps</h3>
+<div class="grid g2">
+<div class="card"><h4>1 · Define PIRs</h4><p>e.g. "Which ransomware affiliates are targeting UK financial services, and how do they gain initial access?" Keep 5–15, review quarterly.</p></div>
+<div class="card"><h4>2 · Build a threat model</h4><p>Profile the 5–10 actors most relevant by sector, geography and tech stack. List their techniques in ATT&CK.</p></div>
+<div class="card"><h4>3 · Assess coverage</h4><p>Overlay prioritised techniques against current detections in ATT&CK Navigator. Gaps become your backlog.</p></div>
+<div class="card"><h4>4 · Engineer detections</h4><p>Write behaviour-based rules (Sigma, KQL, SPL) as code, version controlled and unit-tested with emulation data.</p></div>
+<div class="card"><h4>5 · Hunt by hypothesis</h4><p>"If APT29 were here, we would see anomalous OAuth app consent." Hunt, document, convert findings into detections.</p></div>
+<div class="card"><h4>6 · Validate continuously</h4><p>Emulate adversaries with Atomic Red Team, CALDERA or commercial BAS tools. Measure detection and response.</p></div>
+<div class="card"><h4>7 · Measure and report</h4><p>Track technique coverage %, mean time to detect, PIRs answered and decisions influenced. Report in business terms.</p></div>
+<div class="card"><h4>Enablers</h4><p>A TIP (MISP, OpenCTI or commercial), STIX/TAXII sharing, ISAC membership, TLP 2.0 discipline and analyst training in structured analytic techniques.</p></div>
+</div>
+<h3>Analytic rigour</h3>
+<p>Use estimative language consistently (e.g. "likely" = 55–80%), separate source reliability from information credibility (Admiralty Code A1–F6), and apply structured techniques such as Analysis of Competing Hypotheses to manage bias, especially in attribution.</p>
+</section>
+
+<!-- 5 -->
+<section id="s5" class="reveal">
+<div class="kicker">05 · Framework</div>
+<h2>The Lockheed Martin Cyber Kill Chain®</h2>
+<p>Published in 2011, the Kill Chain models an intrusion as seven sequential phases. Its key defensive insight: an adversary must succeed at every phase, while a defender needs to break the chain only once, and the earlier the better.</p>
+<div class="fig">
+<div class="btns"><button id="kcPlay">▶ Play intrusion</button><button id="kcBreak">Break the chain at Delivery</button></div>
+<div class="kc" id="kc"></div>
+<div class="card" id="kcInfo"><p>Select a phase or play the animation.</p></div>
+<figcaption>Fig 5 · Seven phases of the Cyber Kill Chain. Red = adversary progress; teal = defender disruption.</figcaption>
+</div>
+<h3>Courses of action matrix</h3>
+<table>
+<tr><th>Phase</th><th>Detect</th><th>Deny</th><th>Disrupt</th><th>Degrade / Deceive</th></tr>
+<tr><td>Recon</td><td>Web analytics, honeytokens</td><td>Reduce exposed info</td><td>—</td><td>Fake employee personas</td></tr>
+<tr><td>Delivery</td><td>Email gateway, proxy</td><td>Attachment blocking</td><td>Sandboxing</td><td>Email quarantine</td></tr>
+<tr><td>Exploitation</td><td>EDR, HIDS</td><td>Patching</td><td>Exploit protection</td><td>—</td></tr>
+<tr><td>Installation</td><td>EDR, Sysmon</td><td>App allow-listing</td><td>Least privilege</td><td>—</td></tr>
+<tr><td>C2</td><td>NDR, DNS analytics</td><td>Egress filtering</td><td>DNS sinkhole</td><td>Tarpit</td></tr>
+<tr><td>Actions</td><td>DLP, UEBA</td><td>Segmentation</td><td>Isolation</td><td>Honeypots, canary data</td></tr>
+</table>
+<div class="callout"><strong>Limits:</strong> the model is perimeter- and malware-centric. It struggles with insiders, cloud identity abuse, and "living off the land" intrusions where there is no weaponised payload. That is where ATT&CK complements it.</div>
+</section>
+
+<!-- 6 -->
+<section id="s6" class="reveal">
+<div class="kicker">06 · Framework</div>
+<h2>MITRE ATT&CK®</h2>
+<p>ATT&CK is a globally accessible knowledge base of adversary behaviour built from real-world observations. The Enterprise matrix organises behaviour into <strong>14 tactics</strong> (the adversary's "why"), each containing <strong>techniques</strong> and sub-techniques (the "how"), linked to procedure examples, groups, software, mitigations and data sources.</p>
+<div class="fig">
+<div class="btns" id="atkBtns"></div>
+<div class="attack" id="attack"></div>
+<figcaption>Fig 6 · Simplified Enterprise ATT&CK matrix (representative techniques). Select an actor to highlight documented techniques, as you would with an ATT&CK Navigator layer.</figcaption>
+</div>
+<div class="grid g3">
+<div class="card"><h4>Coverage mapping</h4><p>Score detections per technique; prioritise gaps for the actors in your threat model.</p></div>
+<div class="card"><h4>Shared language</h4><p>"T1003.001" means the same to a vendor, an ISAC and your SOC: LSASS memory credential dumping.</p></div>
+<div class="card"><h4>Emulation plans</h4><p>MITRE CTID adversary emulation plans and ATT&CK Evaluations turn reporting into repeatable tests.</p></div>
+<div class="card"><h4>Mitigations (M-codes)</h4><p>Link techniques to controls such as M1032 MFA or M1026 Privileged Account Management.</p></div>
+<div class="card"><h4>Data sources</h4><p>Show which telemetry you need (process creation, logon sessions) before you can detect a technique.</p></div>
+<div class="card"><h4>Related projects</h4><p>D3FEND for countermeasures; ATT&CK for ICS and Mobile; ATLAS for attacks on AI systems.</p></div>
+</div>
+</section>
+
+<!-- 7 -->
+<section id="s7" class="reveal">
+<div class="kicker">07 · Framework</div>
+<h2>The Diamond Model of Intrusion Analysis</h2>
+<p>Caltagirone, Pendergast and Betz (2013) proposed that every intrusion event consists of four core features connected as a diamond: an <strong>adversary</strong> uses a <strong>capability</strong> over <strong>infrastructure</strong> against a <strong>victim</strong>. Its power lies in <em style="font-style:normal;color:var(--amber)">pivoting</em>: knowing one vertex helps you discover the others.</p>
+<div class="fig">
+<div class="grid g2" style="align-items:center">
+<svg viewBox="0 0 440 440" role="img" aria-label="Diamond model with four vertices">
+<g stroke="#42d692" stroke-width="2" fill="none">
+<line class="dm-edge" x1="220" y1="50" x2="60" y2="220"/><line class="dm-edge" x1="220" y1="50" x2="380" y2="220"/>
+<line class="dm-edge" x1="60" y1="220" x2="220" y2="390"/><line class="dm-edge" x1="380" y1="220" x2="220" y2="390"/>
+</g>
+<line x1="220" y1="50" x2="220" y2="390" stroke="#a882e8" stroke-width="1.5" stroke-dasharray="3 5"/>
+<line x1="60" y1="220" x2="380" y2="220" stroke="#4fb3d9" stroke-width="1.5" stroke-dasharray="3 5"/>
+<text x="232" y="140" fill="#a882e8" font-size="11">socio-political axis</text>
+<text x="250" y="212" fill="#4fb3d9" font-size="11">technology axis</text>
+<g font-size="14" font-weight="600" text-anchor="middle">
+<circle cx="220" cy="50" r="34" fill="#1b1e1d" stroke="#e5534b" stroke-width="2"/><text x="220" y="55" fill="#f3f4f6">Adversary</text>
+<circle cx="60" cy="220" r="40" fill="#1b1e1d" stroke="#5b9cf0" stroke-width="2"/><text x="60" y="225" fill="#f3f4f6" font-size="12">Infrastructure</text>
+<circle cx="380" cy="220" r="38" fill="#1b1e1d" stroke="#42d692" stroke-width="2"/><text x="380" y="225" fill="#f3f4f6" font-size="13">Capability</text>
+<circle cx="220" cy="390" r="34" fill="#1b1e1d" stroke="#4fb3d9" stroke-width="2"/><text x="220" y="395" fill="#f3f4f6">Victim</text>
+</g>
+<circle r="6" fill="#42d692" class="pulse"><animateMotion dur="6s" repeatCount="indefinite" path="M220 50 L380 220 L220 390 L60 220 Z"/></circle>
+</svg>
+<div>
+<p><span class="tag">Adversary</span> Operator and customer, e.g. a ransomware affiliate and the RaaS operator.</p>
+<p><span class="tag">Capability</span> Malware, exploits, tradecraft: Cobalt Strike, a ToolShell exploit, help-desk vishing.</p>
+<p><span class="tag">Infrastructure</span> Domains, IPs, VPS, compromised routers, cloud tenants, email accounts.</p>
+<p><span class="tag">Victim</span> Organisation, people, assets, email addresses.</p>
+<p><span class="tag">Meta-features</span> Timestamp, phase, result, direction, methodology, resources.</p>
+</div></div>
+<figcaption>Fig 7 · The Diamond Model. The orbiting marker illustrates analytic pivoting between vertices.</figcaption>
+</div>
+<h3>Pivoting example</h3>
+<p>A phishing email hits the finance team (<span class="mono">victim</span>). The attachment drops a loader (<span class="mono">capability</span>) that beacons to a domain (<span class="mono">infrastructure</span>). Passive DNS and certificate pivots reveal 40 sibling domains with the same registrar pattern, previously reported against other banks, associated with a known cluster (<span class="mono">adversary</span>). Linked events form <strong>activity threads</strong>; similar threads form <strong>activity groups</strong>, the basis of actor tracking.</p>
+</section>
+
+<!-- 8 -->
+<section id="s8" class="reveal">
+<div class="kicker">08 · Synthesis</div>
+<h2>Using the frameworks together</h2>
+<p>These models are complementary lenses, not competitors. A mature CTI function uses all three, and increasingly the Unified Kill Chain, which merges Kill Chain and ATT&CK into 18 phases.</p>
+<table>
+<tr><th></th><th>Cyber Kill Chain</th><th>MITRE ATT&CK</th><th>Diamond Model</th></tr>
+<tr><td>Question answered</td><td>Where in the intrusion are we?</td><td>Exactly how did they do it?</td><td>Who, against whom, using what?</td></tr>
+<tr><td>Granularity</td><td>7 coarse phases</td><td>14 tactics, 200+ techniques, 400+ sub-techniques</td><td>Single events → activity groups</td></tr>
+<tr><td>Best for</td><td>Executive narrative, control placement</td><td>Detection engineering, coverage, emulation</td><td>Clustering, attribution, pivoting</td></tr>
+<tr><td>Weakness</td><td>Linear, malware-centric</td><td>Can become a box-ticking exercise</td><td>Needs disciplined data capture</td></tr>
+</table>
+<div class="fig">
+<svg viewBox="0 0 900 200" role="img" aria-label="Workflow combining frameworks">
+<g font-size="13" text-anchor="middle">
+<rect x="10" y="60" width="200" height="80" rx="8" fill="#222624" stroke="#4fb3d9"/><text x="110" y="95" fill="#f3f4f6" font-weight="600">Diamond Model</text><text x="110" y="115" fill="#9ca3af" font-size="11">cluster events → actor</text>
+<rect x="240" y="60" width="200" height="80" rx="8" fill="#222624" stroke="#e5534b"/><text x="340" y="95" fill="#f3f4f6" font-weight="600">Kill Chain</text><text x="340" y="115" fill="#9ca3af" font-size="11">phase the campaign</text>
+<rect x="470" y="60" width="200" height="80" rx="8" fill="#222624" stroke="#42d692"/><text x="570" y="95" fill="#f3f4f6" font-weight="600">ATT&CK</text><text x="570" y="115" fill="#9ca3af" font-size="11">map TTPs → gaps</text>
+<rect x="700" y="60" width="190" height="80" rx="8" fill="#222624" stroke="#5b9cf0"/><text x="795" y="95" fill="#f3f4f6" font-weight="600">Action</text><text x="795" y="115" fill="#9ca3af" font-size="11">detect · hunt · brief</text>
+</g>
+<g stroke="#42d692" stroke-width="2" class="flow"><line x1="212" y1="100" x2="238" y2="100"/><line x1="442" y1="100" x2="468" y2="100"/><line x1="672" y1="100" x2="698" y2="100"/></g>
+</svg>
+<figcaption>Fig 8 · A typical analytic pipeline combining the three frameworks.</figcaption>
+</div>
+</section>
+
+<!-- 9 -->
+<section id="s9" class="reveal">
+<div class="kicker">09 · Adversaries</div>
+<h2>TTPs across the adversary spectrum</h2>
+<p>Adversaries differ in motivation, resources and patience, but their tradecraft increasingly converges: criminals buy nation-state-grade tooling, and states use criminal infrastructure and ransomware as cover.</p>
+<div class="fig">
+<div class="spec"><span style="background:#4fb3d9"></span><span style="background:#6fb38a"></span><span style="background:#42d692"></span><span style="background:#e0703f"></span><span style="background:#e5534b"></span></div>
+<div style="display:flex;justify-content:space-between;font:11px var(--mono);color:var(--mute)"><span>Opportunistic crime</span><span>Organised syndicates</span><span>Ransomware ecosystems</span><span>Hybrid state/crime</span><span>State APTs</span></div>
+<div style="display:flex;justify-content:space-between;font:11px var(--mono);color:var(--mute);margin-top:4px"><span>Fast, noisy, profit</span><span></span><span></span><span></span><span>Patient, stealthy, strategic</span></div>
+<figcaption>Fig 9 · The adversary spectrum, by sophistication, patience and motivation.</figcaption>
+</div>
+<div class="btns" id="profBtns"></div>
+<div id="profs"></div>
+<h3>Cross-cutting observations</h3>
+<div class="grid g3">
+<div class="card"><h4>Identity is the new perimeter</h4><p>Valid accounts (T1078), MFA fatigue (T1621) and token theft dominate initial access across crime and state actors.</p></div>
+<div class="card"><h4>Living off the land</h4><p>PowerShell, WMI, RMM tools and native binaries reduce the value of hash-based IOCs to near zero.</p></div>
+<div class="card"><h4>Edge-device exploitation</h4><p>VPNs, firewalls and file-transfer appliances (T1190) are favoured by both ransomware crews and APTs.</p></div>
+<div class="card"><h4>Specialisation</h4><p>Initial access brokers, RaaS developers, affiliates and negotiators operate as a supply chain.</p></div>
+<div class="card"><h4>Faster dwell times</h4><p>Ransomware breakout can take hours; espionage actors may remain for years. Detection strategy must handle both.</p></div>
+<div class="card"><h4>Attribution is hard</h4><p>Shared tooling and false flags (e.g. Olympic Destroyer) demand ACH and confidence statements.</p></div>
+</div>
+</section>
+
+<!-- 10 -->
+<section id="s10" class="reveal">
+<div class="kicker">10 · Roadmap</div>
+<h2>Maturity roadmap & checklist</h2>
+<div class="mat">
+<div><b>1</b>Ad hoc<br><span style="color:var(--mute)">Free IOC feeds, no PIRs</span></div>
+<div><b>2</b>Reactive<br><span style="color:var(--mute)">TIP in place, IOC enrichment</span></div>
+<div><b>3</b>Defined<br><span style="color:var(--mute)">PIRs, actor profiles, ATT&CK mapping</span></div>
+<div><b>4</b>Integrated<br><span style="color:var(--mute)">Detection-as-code, hunts, purple teams</span></div>
+<div><b>5</b>Strategic<br><span style="color:var(--mute)">Drives risk & business decisions</span></div>
+</div>
+<h3>90-day starter checklist</h3>
+<table>
+<tr><th>Days</th><th>Action</th><th>Output</th></tr>
+<tr><td>0–30</td><td>Interview stakeholders; draft PIRs; inventory telemetry</td><td>PIR register, data-source map</td></tr>
+<tr><td>30–60</td><td>Profile top 5 actors; build ATT&CK Navigator layers; score coverage</td><td>Threat model, gap heatmap</td></tr>
+<tr><td>60–90</td><td>Ship 10 behaviour detections for top gaps; run first emulation; brief the board</td><td>Detections, test report, strategic brief</td></tr>
+</table>
+<div class="callout"><strong>Key takeaway:</strong> intelligence-led defence is measured not by how much threat data you consume, but by how many decisions, detections and investments it changes.</div>
+</section>
+
+<footer id="refs">
+<p style="font-family:var(--serif);color:var(--amber);font-size:1.3rem;margin:0 0 20px">Adaptive Online</p><h3 style="color:var(--ink)">Sources & further reading</h3>
+<ul>
+<li><a href="https://attack.mitre.org/">MITRE ATT&CK®</a> and <a href="https://attack.mitre.org/groups/">ATT&CK Groups</a></li>
+<li><a href="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html">Lockheed Martin – The Cyber Kill Chain®</a></li>
+<li><a href="https://www.activeresponse.org/wp-content/uploads/2013/07/diamond.pdf">Caltagirone, Pendergast & Betz – The Diamond Model of Intrusion Analysis (2013)</a></li>
+<li><a href="https://detect-respond.blogspot.com/2013/03/the-pyramid-of-pain.html">David Bianco – The Pyramid of Pain</a></li>
+<li><a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a">CISA AA23-320A – Scattered Spider</a></li>
+<li><a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-038a">CISA AA24-038A – PRC state-sponsored actors (Volt Typhoon)</a></li>
+<li><a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-165a">CISA AA23-165A – Understanding LockBit</a></li>
+<li><a href="https://www.unifiedkillchain.com/">The Unified Kill Chain</a> · <a href="https://d3fend.mitre.org/">MITRE D3FEND</a></li>
+</ul>
+<p style="font-size:.8rem">ATT&CK® is a registered trademark of The MITRE Corporation. Cyber Kill Chain® is a registered trademark of Lockheed Martin. Actor technique mappings are representative and simplified; consult the linked ATT&CK group pages for authoritative detail.</p>
+</footer>
+
+<script>
+// hero network
+(()=>{const s=document.getElementById('heroNet');const N=40,p=[];for(let i=0;i<N;i++)p.push({x:Math.random()*1000,y:Math.random()*600,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4});
+const ns='http://www.w3.org/2000/svg';function draw(){s.innerHTML='';p.forEach(a=>{a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>1000)a.vx*=-1;if(a.y<0||a.y>600)a.vy*=-1});
+for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){const d=Math.hypot(p[i].x-p[j].x,p[i].y-p[j].y);if(d<140){const l=document.createElementNS(ns,'line');l.setAttribute('x1',p[i].x);l.setAttribute('y1',p[i].y);l.setAttribute('x2',p[j].x);l.setAttribute('y2',p[j].y);l.setAttribute('stroke','#42d692');l.setAttribute('stroke-opacity',1-d/140);s.appendChild(l)}}
+p.forEach(a=>{const c=document.createElementNS(ns,'circle');c.setAttribute('cx',a.x);c.setAttribute('cy',a.y);c.setAttribute('r',2.5);c.setAttribute('fill','#4fb3d9');s.appendChild(c)});requestAnimationFrame(draw)}
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)draw()})();
+
+// lifecycle
+const LC=[["Direction","Planning & requirements","Define Priority Intelligence Requirements with stakeholders: what decisions must intelligence support? Scope, resources and success measures are set here."],
+["Collection","Gather raw data","Internal telemetry (EDR, SIEM, email, IR cases), external sources (ISACs, vendors, government advisories, OSINT, dark-web forums, malware repositories)."],
+["Processing","Make data usable","Normalise, translate, de-duplicate, decode and enrich. Structure into STIX objects within a TIP; assign source reliability and confidence."],
+["Analysis","Produce judgements","Apply frameworks and structured analytic techniques to answer the PIRs: who, what, how, why, and so what for this organisation."],
+["Dissemination","Deliver to consumers","Right format, right audience, right time: detection rules, hunt packages, flash alerts, executive briefs, all TLP-marked."],
+["Feedback","Evaluate & refine","Did the product answer the question? Was it timely and actionable? Feedback updates requirements and restarts the cycle."]];
+(()=>{const s=document.getElementById('lcSvg'),ns='http://www.w3.org/2000/svg',det=document.getElementById('lcDetail');let cur=0,timer;
+const nodes=LC.map((d,i)=>{const a=-Math.PI/2+i*Math.PI/3,x=250+170*Math.cos(a),y=250+170*Math.sin(a);const g=document.createElementNS(ns,'g');g.setAttribute('class','lc-node');g.setAttribute('tabindex','0');
+g.innerHTML=`<circle cx="${x}" cy="${y}" r="48" fill="#222624" stroke="#3d4541" stroke-width="2"/><text x="${x}" y="${y-4}" text-anchor="middle" font-size="11" fill="#9ca3af">0${i+1}</text><text x="${x}" y="${y+14}" text-anchor="middle" font-size="13" font-weight="600" fill="#f3f4f6">${d[0]}</text>`;
+g.onclick=()=>{clearInterval(timer);sel(i)};g.onkeydown=e=>{if(e.key==='Enter')g.onclick()};s.appendChild(g);return g});
+function sel(i){cur=i;nodes.forEach((n,j)=>n.classList.toggle('on',j===i));det.innerHTML=`<div class="kicker">Phase 0${i+1}</div><h4 style="font-size:1.3rem;margin:.3em 0">${LC[i][0]} · ${LC[i][1]}</h4><p>${LC[i][2]}</p>`}
+sel(0);timer=setInterval(()=>sel((cur+1)%6),3500)})();
+
+// kill chain
+const KC=[["Reconnaissance","Harvest emails, LinkedIn profiles, exposed services, conference attendee lists."],["Weaponisation","Couple exploit with payload: malicious macro document, trojanised installer, exploit kit."],["Delivery","Transmit the weapon: spear-phishing, malicious link, USB, drive-by, supply chain."],["Exploitation","Trigger code execution: CVE exploit, user enabling macros, credential use."],["Installation","Establish persistence: implant, web shell, scheduled task, new service, registry run key."],["Command & Control","Remote channel over HTTPS, DNS tunnelling or legitimate cloud services."],["Actions on Objectives","Exfiltration, encryption for ransom, fraud, sabotage, espionage."]];
+(()=>{const box=document.getElementById('kc'),info=document.getElementById('kcInfo');const els=KC.map((k,i)=>{const d=document.createElement('div');d.innerHTML=`<b>0${i+1}</b>${k[0]}`;d.onclick=()=>{info.innerHTML=`<h4>${k[0]}</h4><p>${k[1]}</p>`};box.appendChild(d);return d});
+let t;function run(stop){clearInterval(t);els.forEach(e=>e.className='');let i=0;t=setInterval(()=>{if(i>=7){clearInterval(t);return}
+if(stop!==undefined&&i===stop){els[i].className='brk';info.innerHTML=`<h4>Chain broken at ${KC[i][0]}</h4><p>The sandbox detonates the attachment and the email is quarantined. Phases 4–7 never happen, and the attachment's behaviour becomes new intelligence.</p>`;clearInterval(t);return}
+els[i].className='act';els[i].onclick();i++},700)}
+document.getElementById('kcPlay').onclick=()=>run();document.getElementById('kcBreak').onclick=()=>run(2)})();
+
+// ATT&CK
+const TAC={"Reconnaissance":["T1595 Active Scanning","T1589 Gather Victim Identity Info","T1598 Phishing for Information"],
+"Resource Development":["T1583 Acquire Infrastructure","T1584 Compromise Infrastructure","T1588 Obtain Capabilities"],
+"Initial Access":["T1566 Phishing","T1190 Exploit Public-Facing App","T1078 Valid Accounts","T1195 Supply Chain Compromise","T1133 External Remote Services"],
+"Execution":["T1059 Command & Scripting","T1204 User Execution","T1047 WMI"],
+"Persistence":["T1098 Account Manipulation","T1053 Scheduled Task/Job","T1505 Server Software Component","T1136 Create Account"],
+"Privilege Escalation":["T1068 Exploitation for PrivEsc","T1548 Abuse Elevation Control"],
+"Defense Evasion":["T1027 Obfuscated Files","T1562 Impair Defenses","T1218 System Binary Proxy Exec","T1070 Indicator Removal"],
+"Credential Access":["T1003 OS Credential Dumping","T1110 Brute Force","T1621 MFA Request Generation","T1606 Forge Web Credentials"],
+"Discovery":["T1087 Account Discovery","T1018 Remote System Discovery","T1482 Domain Trust Discovery"],
+"Lateral Movement":["T1021 Remote Services","T1550 Use Alternate Auth Material"],
+"Collection":["T1114 Email Collection","T1213 Data from Info Repositories","T1560 Archive Collected Data"],
+"Command and Control":["T1071 Application Layer Protocol","T1219 Remote Access Software","T1090 Proxy","T1105 Ingress Tool Transfer"],
+"Exfiltration":["T1041 Exfil over C2","T1567 Exfil to Web Service"],
+"Impact":["T1486 Data Encrypted for Impact","T1490 Inhibit System Recovery","T1657 Financial Theft"]};
+const ACT={
+"FIN7":{type:"Financial cybercrime syndicate",motive:"Financial gain",tg:"Retail, hospitality, restaurants; later ransomware partnerships",ttp:["T1566","T1204","T1059","T1053","T1027","T1003","T1021","T1071","T1105","T1486"],
+desc:"Long-running, highly organised group that ran front companies (e.g. 'Combi Security') to recruit pentesters. Known for weaponised documents and JavaScript, the Carbanak backdoor, POS malware, and later collaboration with ransomware operations.",
+notes:["Spear-phishing with malicious attachments and follow-up phone calls to coax victims","JavaScript/VBS loaders, PowerShell, scheduled-task persistence","Malicious USB devices mailed to targets (BadUSB)","Pivot from card theft to ransomware affiliation"]},
+"Scattered Spider":{type:"Financially motivated, social-engineering specialist",motive:"Extortion, data theft",tg:"Telecoms, hospitality, retail, insurance, BPO, SaaS",ttp:["T1598","T1589","T1566","T1078","T1621","T1098","T1136","T1219","T1213","T1567","T1486","T1562"],
+desc:"Young, native-English-speaking collective (part of 'The Com') that excels at help-desk impersonation, SIM swapping and MFA fatigue. Linked to high-profile casino and UK retail intrusions, and to ALPHV/BlackCat and DragonForce ransomware deployment.",
+notes:["Vishing IT help desks to reset passwords and MFA (T1656 Impersonation)","MFA push bombing (T1621) and SIM swapping","Legitimate RMM tools: AnyDesk, ScreenConnect, TeamViewer (T1219)","Enumerate SharePoint/Confluence; exfil to cloud storage; ESXi encryption"]},
+"LockBit (RaaS)":{type:"Ransomware-as-a-Service ecosystem",motive:"Extortion",tg:"Opportunistic: any sector, SMEs to critical infrastructure",ttp:["T1190","T1078","T1133","T1059","T1047","T1562","T1003","T1018","T1021","T1560","T1567","T1486","T1490","T1070"],
+desc:"Among the most prolific RaaS operations of 2022–2024, disrupted by Operation Cronos (NCA-led) in February 2024. Affiliates vary widely in skill, so TTPs reflect the initial access broker and affiliate playbook rather than one team.",
+notes:["Initial access via exploited edge devices (e.g. Citrix Bleed), RDP, purchased credentials","Disable EDR, delete shadow copies (T1490), clear logs","Double extortion: StealBit / rclone exfiltration then encryption","Group Policy used to push the encryptor domain-wide"]},
+"APT29":{type:"State APT (Russia · SVR)",motive:"Strategic intelligence collection",tg:"Governments, diplomats, think-tanks, technology and cloud providers",ttp:["T1195","T1566","T1078","T1110","T1098","T1606","T1550","T1027","T1070","T1114","T1071","T1090","T1482"],
+desc:"Also tracked as Cozy Bear, NOBELIUM and Midnight Blizzard. Highly patient and operationally secure; known for the SolarWinds SUNBURST supply-chain compromise and cloud identity abuse, including the 2024 Microsoft corporate email intrusion.",
+notes:["Supply chain compromise (SolarWinds Orion)","Password spraying against legacy test tenants; malicious OAuth apps","Golden SAML / forged tokens (T1606.002)","Targeted email collection; residential proxy infrastructure"]},
+"APT28":{type:"State APT (Russia · GRU Unit 26165)",motive:"Espionage, influence operations",tg:"Military, governments, political parties, NATO members, media",ttp:["T1598","T1566","T1110","T1190","T1078","T1068","T1003","T1114","T1560","T1071","T1090","T1070"],
+desc:"Also Fancy Bear / Forest Blizzard. Associated with credential phishing, the 2016 DNC hack-and-leak, router exploitation and exploitation of Outlook vulnerability CVE-2023-23397.",
+notes:["Credential-harvesting phishing with lookalike domains","Password spraying and brute force (T1110.003)","Compromised SOHO routers as proxy infrastructure","Hack-and-leak information operations"]},
+"Lazarus":{type:"Hybrid state/crime (DPRK · RGB)",motive:"Revenue generation for the state, espionage, disruption",tg:"Banks (SWIFT), cryptocurrency exchanges, defence, software supply chains",ttp:["T1589","T1566","T1204","T1195","T1059","T1027","T1218","T1003","T1021","T1105","T1041","T1657","T1486"],
+desc:"Umbrella for DPRK clusters (incl. BlueNoroff, Andariel). Responsible for the Bangladesh Bank SWIFT heist, WannaCry, the 3CX supply-chain compromise and multi-hundred-million-dollar crypto thefts such as Bybit (2025).",
+notes:["'Operation Dream Job': fake recruiters on LinkedIn delivering trojanised tools","Trojanised npm/PyPI packages and software updates","Fraudulent IT workers infiltrating Western firms","Laundering via mixers and cross-chain bridges"]},
+"Volt Typhoon":{type:"State APT (China)",motive:"Pre-positioning for disruption of critical infrastructure",tg:"US communications, energy, water, transport, including Guam",ttp:["T1595","T1584","T1190","T1078","T1047","T1059","T1003","T1087","T1018","T1021","T1090","T1070"],
+desc:"CISA and partners assessed in 2024 that Volt Typhoon pre-positioned in IT networks to enable disruptive attacks on OT in a future crisis. Defining trait: almost exclusively living-off-the-land with minimal malware.",
+notes:["Exploit Fortinet, Ivanti, Citrix and other edge devices","Native tools only: wmic, ntdsutil, netsh, PowerShell","Extract NTDS.dit for domain credentials (T1003.003)","KV-botnet of end-of-life SOHO routers as multi-hop proxy"]}};
+(()=>{const g=document.getElementById('attack'),bt=document.getElementById('atkBtns');
+Object.entries(TAC).forEach(([t,ts])=>{const c=document.createElement('div');c.className='tac';c.innerHTML=`<h5>${t}</h5>`+ts.map(x=>`<div class="tec" data-id="${x.split(' ')[0]}">${x}</div>`).join('');g.appendChild(c)});
+const all=['None',...Object.keys(ACT)];all.forEach(a=>{const b=document.createElement('button');b.textContent=a;b.onclick=()=>{[...bt.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');
+const set=new Set(a==='None'?[]:ACT[a].ttp);g.querySelectorAll('.tec').forEach((e,i)=>{e.classList.remove('hit');if(set.has(e.dataset.id))setTimeout(()=>e.classList.add('hit'),i*15)})};bt.appendChild(b)});bt.children[1].click()})();
+
+// profiles
+(()=>{const bt=document.getElementById('profBtns'),box=document.getElementById('profs');const names=Object.keys(ACT);
+names.forEach((n,i)=>{const a=ACT[n];const d=document.createElement('div');d.className='prof card';d.innerHTML=`<div class="kicker">${a.type}</div><h3 style="margin-top:.3em;font-size:1.5rem;font-family:var(--serif)">${n}</h3>
+<p>${a.desc}</p><div class="grid g2" style="margin-top:14px"><div><h4 style="font-size:.85rem;color:var(--amber);font-family:var(--mono)">MOTIVATION / TARGETING</h4><p>${a.motive}<br><span style="color:var(--mute)">${a.tg}</span></p>
+<h4 style="font-size:.85rem;color:var(--amber);font-family:var(--mono);margin-top:14px">ATT&CK TECHNIQUES</h4><div>${a.ttp.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>
+<div><h4 style="font-size:.85rem;color:var(--amber);font-family:var(--mono)">SIGNATURE PROCEDURES</h4><ul style="margin:0;padding-left:18px;color:#d1d5db">${a.notes.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;box.appendChild(d);
+const b=document.createElement('button');b.textContent=n;b.onclick=()=>{[...bt.children].forEach(x=>x.classList.remove('on'));[...box.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');d.classList.add('on')};bt.appendChild(b)});bt.children[0].click()})();
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target)}}),{threshold:.05});
+document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('pre');io.observe(el)}});
+</script>
+</body>
+</html>
